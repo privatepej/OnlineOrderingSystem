@@ -58,7 +58,51 @@ const Api = {
     }
   },
 
-  // Add other API functions here (e.g., createProduct, updateProduct, deleteProduct)
+  updateProduct: async (product) => {
+    try {
+      const response = await axiosInstance.put("/product/updates", product);
+      return response.data;
+    } catch (error) {
+      console.error("Error updating product:", error.message);
+      throw error;
+    }
+  },
+
+  // Add a new category
+  addCategory: async (newCategory) => {
+    try {
+      const response = await axiosInstance.post("/category/add", newCategory);
+      console.log(response);
+      return response.data;
+    } catch (error) {
+      console.error("Error adding category:", error.message);
+      throw error;
+    }
+  },
+
+  deleteCategory: async (categoryName) => {
+    try {
+      const response = await axiosInstance.delete(
+        `/category/delete?categoryName=${categoryName}`
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Error deleting category:", error.message);
+      throw error;
+    }
+  },
+
+  updateCategory: async ({ id, newName }) => {
+    try {
+      const response = await axiosInstance.put(
+        `/category/update?id=${id}&newName=${newName}`
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Error updating category:", error.message);
+      throw error;
+    }
+  },
 };
 
 export default Api;

@@ -154,8 +154,7 @@ DROP CONSTRAINT product_categoryname_fkey,
 ADD CONSTRAINT product_categoryname_fkey
 FOREIGN KEY (categoryname)
 REFERENCES category(cname)
-ON UPDATE CASCADE ON DELETE CASCADE;
-
+ON UPDATE CASCADE ON DELETE SET DEFAULT;
 
 ALTER TABLE product_images
 DROP CONSTRAINT product_images_pname_fkey,
@@ -163,3 +162,13 @@ ADD CONSTRAINT product_images_pname_fkey
 FOREIGN KEY (pname)
 REFERENCES product(pname) 
 ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+INSERT INTO category (cname) VALUES ('Uncategorized')
+ON CONFLICT DO NOTHING;
+
+
+ALTER TABLE product
+ALTER COLUMN categoryname SET DEFAULT 'Uncategorized';
+
+

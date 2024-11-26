@@ -21,7 +21,6 @@ const ProductModal = ({
   categories,
   fieldErrors,
   handleChange,
-  isFormValid,
 }) => (
   <Dialog open={isOpen} onClose={onClose}>
     <DialogTitle>Add Product</DialogTitle>
@@ -66,8 +65,8 @@ const ProductModal = ({
           onChange={handleChange}
           required
         >
-          {categories.map((category) => (
-            <MenuItem key={category.id} value={category.cname}>
+          {categories.map((category, index) => (
+            <MenuItem key={index} value={category.cname}>
               {category.cname}
             </MenuItem>
           ))}
