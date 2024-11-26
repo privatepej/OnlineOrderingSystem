@@ -5,7 +5,10 @@ const fetchProductsAndCategories = async () => {
     Api.getProducts(),
     Api.getCategories(),
   ]);
-  return { products: productsData, categories: categoriesData };
+  return {
+    products: Array.isArray(productsData) ? productsData : [],
+    categories: Array.isArray(categoriesData) ? categoriesData : [],
+  };
 };
 
 const useProduct = () => {

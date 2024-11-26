@@ -145,15 +145,10 @@ const Products = () => {
 
   const handleDeleteCategory = async (categoryName) => {
     try {
-      // Step 1: Delete the category
       await Api.deleteCategory(categoryName);
-
-      // Step 2: Update the categories state
       setCategories((prev) =>
         prev.filter((category) => category.cname !== categoryName)
       );
-
-      // Step 3: Update products to set `categoryname` to "Uncategorized" for affected products
       setProducts((prev) =>
         prev.map((product) =>
           product.categoryname === categoryName
@@ -211,7 +206,7 @@ const Products = () => {
         variant="h6"
         sx={{ textAlign: "center", mt: 4, width: "100%" }}
       >
-        No products match your search criteria.
+        No products available
       </Typography>
     );
   }, [filteredProducts]);
@@ -219,14 +214,6 @@ const Products = () => {
   if (loading) {
     return <Loading />;
   }
-
-  // if (!products.length) {
-  //   return (
-  //     <Typography variant="h6" sx={{ textAlign: "center", mt: 4 }}>
-  //       No products available. Please check back later.
-  //     </Typography>
-  //   );
-  // }
 
   return (
     <Container>
@@ -316,11 +303,11 @@ const Products = () => {
           sx={{ flex: 2, ml: 4.5 }}
         />
       </Box>
-      {!products.length && (
+      {/* {!products.length && (
         <Typography variant="h6" sx={{ textAlign: "center", mt: 4 }}>
           No products available. Please check back later.
         </Typography>
-      )}
+      )} */}
       <CustomAlert
         message={alertMessage}
         severity="success"
@@ -343,7 +330,7 @@ const Products = () => {
         isOpen={deleteModal.isOpen}
         onClose={handleCloseDeleteModal}
         onConfirm={handleDeleteProduct}
-        products={products}
+        products={Array.isArray(products) ? products : []} // Guard against bad data
         selectedProduct={selectedProduct}
         setSelectedProduct={setSelectedProduct}
       />
