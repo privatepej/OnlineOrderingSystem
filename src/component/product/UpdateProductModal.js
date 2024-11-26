@@ -13,7 +13,7 @@ import {
   Alert,
   Typography,
 } from "@mui/material";
-import { validateFormUpdate } from "../utils/Validation";
+import { validateFormUpdate } from "../../utils/Validation";
 
 const UpdateProductModal = ({
   isOpen,

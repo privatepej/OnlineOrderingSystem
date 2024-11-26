@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Homepage from "../pages/Homepage";
-import Products from "../component/Products";
+import Products from "../pages/Products";
 import ErrorPage from "../pages/ErrorPage";
 import AboutUs from "../pages/AboutUs";
 import Contact from "../pages/Contact";

@@ -1,5 +1,6 @@
 import Api from "../api/api";
 import { useState, useEffect } from "react";
+
 const fetchProductsAndCategories = async () => {
   const [productsData, categoriesData] = await Promise.all([
     Api.getProducts(),

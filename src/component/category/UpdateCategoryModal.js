@@ -12,7 +12,7 @@ import {
   MenuItem,
   Alert,
 } from "@mui/material";
-import { validateCategoryUpdate } from "../utils/Validation";
+import { validateCategoryUpdate } from "../../utils/Validation";
 
 const UpdateCategoryModal = ({ isOpen, onClose, categories, onUpdate }) => {
   const [selectedCategory, setSelectedCategory] = useState("");

@@ -1,34 +1,26 @@
 import React, { useState, useMemo } from "react";
 import Api from "../api/api";
-import ProductModal from "./ProductModal";
+import ProductModal from "../component/product/ProductModal";
 import { validateForm } from "../utils/Validation";
-import {
-  Container,
-  Typography,
-  Button,
-  Box,
-  FormControl,
-  TextField,
-  InputLabel,
-  Select,
-  MenuItem,
-} from "@mui/material";
+import { Container, Typography, Box } from "@mui/material";
 import Grid from "@mui/material/Grid2";
-import DeleteProductModal from "./DeleteProductModal.js";
-import ProductCard from "./ProductCard";
-import Loading from "./Loading";
-import CustomAlert from "./CustomAlert";
-import UpdateProductModal from "./UpdateProductModal";
+import DeleteProductModal from "../component/category/DeleteProductModal.js";
+import ProductCard from "../component/product/ProductCard";
+import Loading from "../component/Loading";
+import CustomAlert from "../component/CustomAlert";
+import UpdateProductModal from "../component/product/UpdateProductModal";
 import useFilteredProducts from "../hooks/useFilterProduct";
 import useProduct from "../hooks/useProduct";
 import useModal from "../hooks/useModal";
-import CategoryModal from "./CategoryModal";
-import DeleteCategoryModal from "./DeleteCategoryModal";
-import UpdateCategoryModal from "./UpdateCategoryModal";
+import CategoryModal from "../component/category/CategoryModal";
+import DeleteCategoryModal from "../component/category/DeleteCategoryModal";
+import UpdateCategoryModal from "../component/category/UpdateCategoryModal";
+import useAlert from "../hooks/useAlert";
+import AdminButtons from "../component/AdminButtons";
+import ProductFilter from "../component/product/ProductFilter";
 
 const Products = () => {
   const [fieldErrors, setFieldErrors] = useState({});
-  const [alertMessage, setAlertMessage] = useState("");
   const [selectedProduct, setSelectedProduct] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
@@ -41,6 +33,7 @@ const Products = () => {
 
   const { products, categories, loading, setProducts, setCategories } =
     useProduct();
+  const { alertMessage, showAlert } = useAlert();
 
   const addModal = useModal();
   const deleteModal = useModal();
@@ -53,6 +46,15 @@ const Products = () => {
     setNewProduct({ pname: "", price: "", description: "", categoryname: "" });
     setFieldErrors({});
     addModal.closeModal();
+  };
+
+  const handleCloseDeleteModal = () => {
+    setSelectedProduct("");
+    deleteModal.closeModal();
+  };
+
+  const handleCloseUpdateModal = () => {
+    updateModal.closeModal();
   };
 
   const handleChange = (e) => {
@@ -77,25 +79,13 @@ const Products = () => {
       };
       await Api.addProduct(payload);
       setProducts((prev) => [...prev, payload]);
-      setAlertMessage(`Product added successfully!`);
       handleCloseModal();
-      setTimeout(() => setAlertMessage(""), 3000);
+      showAlert(`Product added successfully!`);
     } catch (err) {
       if (err.response && err.response.status === 409) {
         setFieldErrors({ pname: "Product with the same name already exists" });
       }
     }
-  };
-
-  const handleCloseDeleteModal = () => {
-    console.log("Open delete modal");
-    deleteModal.closeModal();
-    setSelectedProduct("");
-  };
-
-  const handleCloseUpdateModal = () => {
-    console.log("Open update modal");
-    updateModal.closeModal();
   };
 
   const handleDeleteProduct = async () => {
@@ -105,9 +95,8 @@ const Products = () => {
       setProducts((prev) =>
         prev.filter((product) => product.pname !== selectedProduct)
       );
-      setAlertMessage(`Product "${selectedProduct}" deleted successfully!`);
+      showAlert(`Product "${selectedProduct}" deleted successfully!`);
       handleCloseDeleteModal();
-      setTimeout(() => setAlertMessage(""), 3000);
     } catch (err) {
       console.error("Failed to delete product:", err);
     }
@@ -121,9 +110,8 @@ const Products = () => {
           p.id === updatedProduct.id ? { ...p, ...updatedProduct } : p
         )
       );
-      setAlertMessage("Product updated successfully!");
+      showAlert("Product updated successfully!");
       handleCloseUpdateModal();
-      setTimeout(() => setAlertMessage(""), 3000);
     } catch (err) {
       console.error("Failed to update product:", err);
     }
@@ -133,13 +121,11 @@ const Products = () => {
     try {
       await Api.addCategory(newCategory); // Call API to add the category
       setCategories((prev) => [...prev, newCategory]); // Update categories state
-      setAlertMessage("Category added successfully!");
+      showAlert("Category added successfully!");
       addCategoryModal.closeModal();
-      setTimeout(() => setAlertMessage(""), 3000);
     } catch (err) {
       console.error("Failed to add category:", err);
-      setAlertMessage("Failed to add category. Please try again.");
-      setTimeout(() => setAlertMessage(""), 3000);
+      showAlert("Failed to add category. Please try again.");
     }
   };
 
@@ -157,13 +143,11 @@ const Products = () => {
         )
       );
 
-      setAlertMessage(`Category "${categoryName}" deleted successfully!`);
+      showAlert(`Category "${categoryName}" deleted successfully!`);
       deleteCategoryModal.closeModal();
-      setTimeout(() => setAlertMessage(""), 3000);
     } catch (err) {
       console.error("Failed to delete category:", err);
-      setAlertMessage("Failed to delete category. Please try again.");
-      setTimeout(() => setAlertMessage(""), 3000);
+      showAlert("Failed to delete category. Please try again.");
     }
   };
 
@@ -180,9 +164,8 @@ const Products = () => {
             : product
         )
       );
-      setAlertMessage("Category updated successfully!");
+      showAlert("Category updated successfully!");
       updateCategoryModal.closeModal();
-      setTimeout(() => setAlertMessage(""), 3000);
     } catch (err) {
       console.error("Failed to update category:", err);
     }
@@ -206,7 +189,7 @@ const Products = () => {
         variant="h6"
         sx={{ textAlign: "center", mt: 4, width: "100%" }}
       >
-        No products available
+        No products match.
       </Typography>
     );
   }, [filteredProducts]);
@@ -222,97 +205,33 @@ const Products = () => {
           Product Catalog
         </Typography>
 
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={addModal.openModal}
-          sx={{ m: 1 }}
-        >
-          Add Product
-        </Button>
-        <Button
-          variant="contained"
-          color="error"
-          onClick={deleteModal.openModal}
-          sx={{ m: 1 }}
-        >
-          Delete Product
-        </Button>
-        <Button
-          variant="contained"
-          color="warning"
-          onClick={updateModal.openModal}
-          sx={{ m: 1 }}
-        >
-          Update Product
-        </Button>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={addCategoryModal.openModal}
-          sx={{ m: 1 }}
-        >
-          Add Category
-        </Button>
-        <Button
-          variant="contained"
-          color="error"
-          onClick={deleteCategoryModal.openModal}
-          sx={{ m: 1 }}
-        >
-          Delete Category
-        </Button>
-        <Button
-          variant="contained"
-          color="warning"
-          onClick={updateCategoryModal.openModal}
-          sx={{ m: 1 }}
-        >
-          Update Category
-        </Button>
+        <AdminButtons
+          onAddProduct={addModal.openModal}
+          onDeleteProduct={deleteModal.openModal}
+          onUpdateProduct={updateModal.openModal}
+          onAddCategory={addCategoryModal.openModal}
+          onDeleteCategory={deleteCategoryModal.openModal}
+          onUpdateCategory={updateCategoryModal.openModal}
+        />
       </Box>
       <Box
         sx={{
-          display: "flex",
-          justifyContent: "start",
-          // alignItems: "center",
           mb: 3,
         }}
       >
-        <FormControl sx={{ flex: 0.94 }}>
-          <InputLabel>Sort by Category</InputLabel>
-          <Select
-            label="Sort by Category"
-            value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
-          >
-            <MenuItem value="">All Categories</MenuItem>
-            {categories.map((category, index) => (
-              <MenuItem key={index} value={category.cname}>
-                {category.cname}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-
-        <TextField
-          label="Search Products"
-          variant="outlined"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          sx={{ flex: 2, ml: 4.5 }}
+        <ProductFilter
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          categories={categories}
         />
       </Box>
-      {/* {!products.length && (
-        <Typography variant="h6" sx={{ textAlign: "center", mt: 4 }}>
-          No products available. Please check back later.
-        </Typography>
-      )} */}
       <CustomAlert
         message={alertMessage}
         severity="success"
         sx={{ mb: 2 }}
-        onClose={() => setAlertMessage("")}
+        onClose={() => showAlert("")}
       />
       <Grid container spacing={5}>
         {memoizedProductCards}
