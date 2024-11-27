@@ -1,4 +1,5 @@
 import { Button, Box } from "@mui/material";
+import { useAuth } from "../hooks/AuthProvider";
 
 const AdminButtons = ({
   onAddProduct,
@@ -8,6 +9,11 @@ const AdminButtons = ({
   onDeleteCategory,
   onUpdateCategory,
 }) => {
+  const { user } = useAuth();
+
+  if (user?.role !== "ADMINISTRATOR") {
+    return null;
+  }
   return (
     <Box sx={{ textAlign: "center", mb: 4 }}>
       <Button

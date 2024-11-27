@@ -103,6 +103,27 @@ const Api = {
       throw error;
     }
   },
+  login: async (email, password) => {
+    try {
+      const response = await axiosInstance.post("/user/login", {
+        email,
+        password,
+      });
+      return response.data;
+    } catch (error) {
+      throw (
+        error.response?.data || "Login failed. Please check your credentials."
+      );
+    }
+  },
+  registerUser: async (formData) => {
+    try {
+      const response = await axiosInstance.post("/user/register", formData);
+      return response.data;
+    } catch (error) {
+      throw error.response?.data || "Registration failed. Please try again.";
+    }
+  },
 };
 
 export default Api;
