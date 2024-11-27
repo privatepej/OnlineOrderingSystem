@@ -14,7 +14,7 @@ const axiosInstance = axios.create({
 const Api = {
   getProducts: async (navigate) => {
     try {
-      const response = await axiosInstance.get("/product/list");
+      const response = await axiosInstance.get("/product/listWithImage");
       return response.data;
     } catch (error) {
       if (error.response && error.response.status === 404) {
@@ -26,11 +26,18 @@ const Api = {
 
   addProduct: async (productData) => {
     try {
-      const response = await axiosInstance.post("/product/add", productData);
-      console.log("response", response);
+      const response = await axiosInstance.post(
+        "/product/addForm",
+        productData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       return response.data;
     } catch (error) {
-      console.log("error add product", error.message);
+      console.error("Error adding product:", error.message);
       throw error;
     }
   },

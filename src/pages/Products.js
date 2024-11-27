@@ -58,9 +58,12 @@ const Products = () => {
   };
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, files } = e.target;
     setFieldErrors((prev) => ({ ...prev, [name]: "" }));
-    setNewProduct((prev) => ({ ...prev, [name]: value }));
+    setNewProduct((prev) => ({
+      ...prev,
+      [name]: files ? files[0] : value, // Attach the file object
+    }));
   };
 
   const handleAddProduct = async () => {
@@ -70,20 +73,52 @@ const Products = () => {
       return;
     }
 
+    // try {
+    //   const payload = {
+    //     pname: newProduct.pname,
+    //     price: parseFloat(newProduct.price),
+    //     description: newProduct.description,
+    //     categoryname: newProduct.categoryname,
+    //   };
+    //   await Api.addProduct(payload);
+    //   setProducts((prev) => [...prev, payload]);
+    //   handleCloseModal();
+    //   showAlert(`Product added successfully!`);
+    // } catch (err) {
+    //   if (err.response && err.response.status === 409) {
+    //     setFieldErrors({ pname: "Product with the same name already exists" });
+    //   }
+    // }
+
     try {
-      const payload = {
-        pname: newProduct.pname,
-        price: parseFloat(newProduct.price),
-        description: newProduct.description,
-        categoryname: newProduct.categoryname,
-      };
-      await Api.addProduct(payload);
-      setProducts((prev) => [...prev, payload]);
+      const formData = new FormData();
+      formData.append("pname", newProduct.pname);
+      formData.append("price", newProduct.price);
+      formData.append("description", newProduct.description);
+      formData.append("categoryname", newProduct.categoryname);
+      if (newProduct.image) {
+        formData.append("imagename", newProduct.image);
+      }
+      const savedProduct = await Api.addProduct(formData);
+      setProducts((prev) => [...prev, savedProduct]);
       handleCloseModal();
-      showAlert(`Product added successfully!`);
+      showAlert("Product added successfully!");
     } catch (err) {
       if (err.response && err.response.status === 409) {
-        setFieldErrors({ pname: "Product with the same name already exists" });
+        const errorMessage = err.response.data;
+
+        if (errorMessage.includes("Product")) {
+          setFieldErrors({ pname: errorMessage });
+        } else if (errorMessage.includes("Image")) {
+          setFieldErrors({ image: errorMessage });
+        } else {
+          setFieldErrors({
+            general: "Conflict error. Please check your inputs.",
+          });
+        }
+      } else {
+        console.error("Error adding product:", err);
+        showAlert("Failed to add product. Please try again.");
       }
     }
   };

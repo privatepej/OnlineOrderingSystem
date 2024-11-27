@@ -12,19 +12,20 @@ const ProductCard = ({ product }) => {
   return (
     <Card
       sx={{
-        height: 345,
+        height: 360,
         display: "flex",
         flexDirection: "column",
       }}
     >
-      <Box sx={{ flexShrink: 0 }}>
-        <CardHeader title={product.pname} />
-      </Box>
-
+      <CardHeader title={product.pname} sx={{ pt: 0.5, pb: 0.5 }} />
       <CardMedia
         component="img"
-        height="160"
-        image={product.image || "/static/images/default-product.jpg"}
+        height="200"
+        image={`http://localhost:8080/onlineshop/product/images/${product.imagename}`}
+        onError={(e) => {
+          e.target.onerror = null;
+          e.target.src = "/img/png/basura.png";
+        }}
         alt={product.pname}
       />
 
@@ -36,7 +37,7 @@ const ProductCard = ({ product }) => {
           justifyContent: "space-between",
         }}
       >
-        <Box sx={{ minHeight: 30 }}>
+        <Box>
           {product.description ? (
             <Typography
               variant="body2"

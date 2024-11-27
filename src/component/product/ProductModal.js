@@ -11,6 +11,8 @@ import {
   FormControl,
   InputLabel,
   Typography,
+  Input,
+  FormHelperText,
 } from "@mui/material";
 
 const ProductModal = ({
@@ -75,6 +77,21 @@ const ProductModal = ({
           <Typography variant="caption" color="error">
             {fieldErrors.categoryname}
           </Typography>
+        )}
+      </FormControl>
+      <FormControl fullWidth margin="dense">
+        <Input
+          name="image"
+          type="file"
+          accept="image/*"
+          onChange={handleChange}
+          error={!!fieldErrors.image}
+          helperText={fieldErrors.image}
+        />
+        {fieldErrors.image && (
+          <FormHelperText sx={{ color: "red" }}>
+            {fieldErrors.image}
+          </FormHelperText>
         )}
       </FormControl>
     </DialogContent>
