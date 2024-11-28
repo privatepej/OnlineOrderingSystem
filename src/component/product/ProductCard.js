@@ -24,7 +24,7 @@ const ProductCard = ({ product }) => {
         image={`http://localhost:8080/onlineshop/product/images/${product.imagename}`}
         onError={(e) => {
           e.target.onerror = null;
-          e.target.src = "/img/png/basura.png";
+          e.target.src = "/img/png/defaultReact.png";
         }}
         alt={product.pname}
       />

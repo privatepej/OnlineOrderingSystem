@@ -65,9 +65,17 @@ const Api = {
     }
   },
 
-  updateProduct: async (product) => {
+  updateProduct: async (productData) => {
     try {
-      const response = await axiosInstance.put("/product/updates", product);
+      const response = await axiosInstance.put(
+        "/product/updates",
+        productData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       return response.data;
     } catch (error) {
       console.error("Error updating product:", error.message);

@@ -12,6 +12,8 @@ import {
   MenuItem,
   Alert,
   Typography,
+  Input,
+  Box,
 } from "@mui/material";
 import { validateFormUpdate } from "../../utils/Validation";
 
@@ -29,6 +31,7 @@ const UpdateProductModal = ({
     price: "",
     description: "",
     categoryname: "",
+    image: "",
   });
   const [isFormDirty, setIsFormDirty] = useState(false);
   const [formErrors, setFormErrors] = useState({});
@@ -43,6 +46,7 @@ const UpdateProductModal = ({
           price: product.price,
           description: product.description,
           categoryname: product.categoryname,
+          image: product.image, // Initialize image key to handle updates
         });
         // setIsFormDirty(false); // Reset dirty flag
         // setFormErrors({}); // Reset errors
@@ -58,14 +62,18 @@ const UpdateProductModal = ({
       price: "",
       description: "",
       categoryname: "",
+      image: "",
     });
     setIsFormDirty(false);
     setFormErrors({});
   };
 
   const handleFieldChange = (e) => {
-    const { name, value } = e.target;
-    setUpdatedProduct((prev) => ({ ...prev, [name]: value }));
+    const { name, value, files } = e.target;
+    setUpdatedProduct((prev) => ({
+      ...prev,
+      [name]: files && files.length > 0 ? files[0] : value,
+    }));
     setIsFormDirty(true);
     setFormErrors((prev) => ({ ...prev, [name]: "" }));
   };
@@ -157,6 +165,24 @@ const UpdateProductModal = ({
             </Typography>
           )}
         </FormControl>
+        <FormControl fullWidth margin="dense">
+          <Input
+            name="image"
+            type="file"
+            accept="image/*"
+            onChange={handleFieldChange}
+          />
+        </FormControl>
+        {updatedProduct.image && updatedProduct.image instanceof File && (
+          <Box sx={{ mt: 2, textAlign: "center" }}>
+            <Typography variant="subtitle2">Image Preview:</Typography>
+            <img
+              src={URL.createObjectURL(updatedProduct.image)}
+              alt="Preview"
+              style={{ maxWidth: "100%", maxHeight: "150px" }}
+            />
+          </Box>
+        )}
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="secondary">

@@ -137,18 +137,44 @@ const Products = () => {
     }
   };
 
-  const handleUpdateProduct = async (updatedProduct) => {
+  // const handleUpdateProduct = async (updatedProduct) => {
+  //   try {
+  //     await Api.updateProduct(updatedProduct);
+  //     setProducts((prev) =>
+  //       prev.map((p) =>
+  //         p.id === updatedProduct.id ? { ...p, ...updatedProduct } : p
+  //       )
+  //     );
+  //     showAlert("Product updated successfully!");
+  //     handleCloseUpdateModal();
+  //   } catch (err) {
+  //     console.error("Failed to update product:", err);
+  //   }
+  // };
+
+  const handleUpdateProduct = async (product) => {
+    const formData = new FormData();
+    formData.append("id", product.id);
+    formData.append("pname", product.pname);
+    formData.append("price", product.price);
+    formData.append("description", product.description);
+    formData.append("categoryname", product.categoryname);
+
+    if (product.image) {
+      formData.append("imagename", product.image); // Attach the new image if provided
+    }
+
     try {
-      await Api.updateProduct(updatedProduct);
-      setProducts((prev) =>
-        prev.map((p) =>
-          p.id === updatedProduct.id ? { ...p, ...updatedProduct } : p
+      const updatedProduct = await Api.updateProduct(formData);
+      setProducts((prevProducts) =>
+        prevProducts.map((p) =>
+          p.id === updatedProduct.id ? updatedProduct : p
         )
       );
       showAlert("Product updated successfully!");
       handleCloseUpdateModal();
     } catch (err) {
-      console.error("Failed to update product:", err);
+      console.error("Error updating product:", err);
     }
   };
 

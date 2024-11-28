@@ -86,7 +86,6 @@ const ProductModal = ({
           accept="image/*"
           onChange={handleChange}
           error={!!fieldErrors.image}
-          helperText={fieldErrors.image}
         />
         {fieldErrors.image && (
           <FormHelperText sx={{ color: "red" }}>
