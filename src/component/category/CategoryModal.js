@@ -14,7 +14,7 @@ const CategoryModal = ({ isOpen, onClose, onSubmit }) => {
 
   const handleChange = (e) => {
     setCategoryName(e.target.value);
-    setError(""); // Clear error on change
+    setError("");
   };
 
   const handleSubmit = () => {
@@ -22,9 +22,9 @@ const CategoryModal = ({ isOpen, onClose, onSubmit }) => {
       setError("Category name is required.");
       return;
     }
-    onSubmit({ cname: categoryName }); // Send the new category to the parent handler
-    setCategoryName(""); // Clear input after submit
-    onClose(); // Close the modal
+    onSubmit({ cname: categoryName });
+    setCategoryName("");
+    onClose();
   };
 
   return (

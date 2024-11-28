@@ -42,11 +42,7 @@ const DeleteProductModal = ({
         <Button onClick={onClose} color="secondary">
           Cancel
         </Button>
-        <Button
-          onClick={onConfirm} // Ensure this calls the handler
-          color="error"
-          disabled={!selectedProduct} // Disable button if no product is selected
-        >
+        <Button onClick={onConfirm} color="error" disabled={!selectedProduct}>
           Delete
         </Button>
       </DialogActions>

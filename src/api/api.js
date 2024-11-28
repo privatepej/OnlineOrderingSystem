@@ -1,9 +1,7 @@
 import axios from "axios";
 
-// Base URL for your backend
 const API_BASE_URL = "/onlineshop";
 
-// Axios instance for centralized configurations
 const axiosInstance = axios.create({
   baseURL: API_BASE_URL,
   headers: {
@@ -147,7 +145,7 @@ const Api = {
       return response.status !== 404;
     } catch (error) {
       console.error("Error checking if file exists:", error);
-      return false; // Assume file doesn't exist in case of error
+      return false;
     }
   },
 };

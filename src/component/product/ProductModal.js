@@ -34,6 +34,8 @@ const ProductModal = ({
       return () => {
         URL.revokeObjectURL(url);
       };
+    } else {
+      setImagePreview("");
     }
   }, [product.image]);
 
