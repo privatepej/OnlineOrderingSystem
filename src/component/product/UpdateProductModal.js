@@ -16,6 +16,7 @@ import {
   Box,
 } from "@mui/material";
 import { validateFormUpdate } from "../../utils/Validation";
+import Api from "../../api/api";
 
 const UpdateProductModal = ({
   isOpen,
@@ -61,10 +62,8 @@ const UpdateProductModal = ({
           price: product.price,
           description: product.description,
           categoryname: product.categoryname,
-          image: product.imagename, // Initialize image key to handle updates
+          image: product.imagename,
         });
-        // setIsFormDirty(false); // Reset dirty flag
-        // setFormErrors({}); // Reset errors
       }
     }
   }, [selectedProduct, products]);
@@ -93,11 +92,38 @@ const UpdateProductModal = ({
     setFormErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     const errors = validateFormUpdate(updatedProduct);
     if (Object.keys(errors).length > 0) {
       setFormErrors(errors);
       return;
+    }
+
+    const isDuplicate = products.some(
+      (product) =>
+        product.pname.toLowerCase() === updatedProduct.pname.toLowerCase() &&
+        product.id !== updatedProduct.id
+    );
+
+    if (isDuplicate) {
+      setFormErrors((prev) => ({
+        ...prev,
+        pname: "Product name already exists. Please use a different name.",
+      }));
+      return;
+    }
+
+    if (updatedProduct.image && updatedProduct.image instanceof File) {
+      const fileExists = await Api.checkImageExists(updatedProduct.image.name);
+      console.log("fileExists", fileExists);
+      if (fileExists) {
+        setFormErrors((prev) => ({
+          ...prev,
+          image:
+            "A file with the same name already exists. Please rename your file or choose a different one.",
+        }));
+        return;
+      }
     }
     onUpdate(updatedProduct);
     clearFields();
@@ -186,7 +212,13 @@ const UpdateProductModal = ({
             type="file"
             accept="image/*"
             onChange={handleFieldChange}
+            error={!!formErrors.image}
           />
+          {formErrors.image && (
+            <Typography variant="caption" color="error">
+              {formErrors.image}
+            </Typography>
+          )}
         </FormControl>
         {imagePreview && (
           <Box sx={{ mt: 1 }}>

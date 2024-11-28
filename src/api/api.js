@@ -139,6 +139,17 @@ const Api = {
       throw error.response?.data || "Registration failed. Please try again.";
     }
   },
+  checkImageExists: async (filename) => {
+    try {
+      const response = await axiosInstance.head(`/product/images/${filename}`, {
+        method: "HEAD",
+      });
+      return response.status !== 404;
+    } catch (error) {
+      console.error("Error checking if file exists:", error);
+      return false; // Assume file doesn't exist in case of error
+    }
+  },
 };
 
 export default Api;

@@ -73,22 +73,18 @@ const Products = () => {
       return;
     }
 
-    // try {
-    //   const payload = {
-    //     pname: newProduct.pname,
-    //     price: parseFloat(newProduct.price),
-    //     description: newProduct.description,
-    //     categoryname: newProduct.categoryname,
-    //   };
-    //   await Api.addProduct(payload);
-    //   setProducts((prev) => [...prev, payload]);
-    //   handleCloseModal();
-    //   showAlert(`Product added successfully!`);
-    // } catch (err) {
-    //   if (err.response && err.response.status === 409) {
-    //     setFieldErrors({ pname: "Product with the same name already exists" });
-    //   }
-    // }
+    const isDuplicate = products.some(
+      (product) =>
+        product.pname.toLowerCase() === newProduct.pname.toLowerCase()
+    );
+
+    if (isDuplicate) {
+      setFieldErrors((prev) => ({
+        ...prev,
+        pname: "Product name already exists. Please use a different name.",
+      }));
+      return;
+    }
 
     try {
       const formData = new FormData();
@@ -99,6 +95,7 @@ const Products = () => {
       if (newProduct.image) {
         formData.append("imagename", newProduct.image);
       }
+
       const savedProduct = await Api.addProduct(formData);
       setProducts((prev) => [...prev, savedProduct]);
       handleCloseModal();
@@ -137,21 +134,6 @@ const Products = () => {
     }
   };
 
-  // const handleUpdateProduct = async (updatedProduct) => {
-  //   try {
-  //     await Api.updateProduct(updatedProduct);
-  //     setProducts((prev) =>
-  //       prev.map((p) =>
-  //         p.id === updatedProduct.id ? { ...p, ...updatedProduct } : p
-  //       )
-  //     );
-  //     showAlert("Product updated successfully!");
-  //     handleCloseUpdateModal();
-  //   } catch (err) {
-  //     console.error("Failed to update product:", err);
-  //   }
-  // };
-
   const handleUpdateProduct = async (product) => {
     const formData = new FormData();
     formData.append("id", product.id);
@@ -182,16 +164,6 @@ const Products = () => {
       handleCloseUpdateModal();
     } catch (err) {
       console.error("Error updating product:", err);
-      // if (err.response && err.response.status === 409) {
-      //   const errorMessage = err.response.data.message;
-      //   if (errorMessage.includes("same name already exists")) {
-      //     setFieldErrors({ pname: errorMessage });
-      //   } else if (errorMessage.includes("Image name already exists")) {
-      //     setFieldErrors({ image: errorMessage });
-      //   }
-      // } else {
-      //   console.error("Error updating product:", err);
-      // }
     }
   };
 
