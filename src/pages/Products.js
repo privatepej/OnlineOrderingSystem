@@ -160,21 +160,38 @@ const Products = () => {
     formData.append("description", product.description);
     formData.append("categoryname", product.categoryname);
 
-    if (product.image) {
-      formData.append("imagename", product.image); // Attach the new image if provided
+    if (product.image instanceof File) {
+      formData.append("imagename", product.image);
     }
 
     try {
       const updatedProduct = await Api.updateProduct(formData);
       setProducts((prevProducts) =>
-        prevProducts.map((p) =>
-          p.id === updatedProduct.id ? updatedProduct : p
-        )
+        prevProducts.map((p) => {
+          if (p.id === updatedProduct.id) {
+            const updated = { ...updatedProduct };
+            if (!updated.imagename) {
+              updated.imagename = p.imagename;
+            }
+            return updated;
+          }
+          return p;
+        })
       );
       showAlert("Product updated successfully!");
       handleCloseUpdateModal();
     } catch (err) {
       console.error("Error updating product:", err);
+      // if (err.response && err.response.status === 409) {
+      //   const errorMessage = err.response.data.message;
+      //   if (errorMessage.includes("same name already exists")) {
+      //     setFieldErrors({ pname: errorMessage });
+      //   } else if (errorMessage.includes("Image name already exists")) {
+      //     setFieldErrors({ image: errorMessage });
+      //   }
+      // } else {
+      //   console.error("Error updating product:", err);
+      // }
     }
   };
 

@@ -35,6 +35,21 @@ const UpdateProductModal = ({
   });
   const [isFormDirty, setIsFormDirty] = useState(false);
   const [formErrors, setFormErrors] = useState({});
+  const [imagePreview, setImagePreview] = useState(null);
+
+  useEffect(() => {
+    if (updatedProduct.image instanceof File) {
+      const url = URL.createObjectURL(updatedProduct.image);
+      setImagePreview(url);
+      return () => {
+        URL.revokeObjectURL(url);
+      };
+    } else if (updatedProduct.image) {
+      setImagePreview(
+        `http://localhost:8080/onlineshop/product/images/${updatedProduct.image}`
+      );
+    }
+  }, [updatedProduct.image]);
 
   useEffect(() => {
     if (selectedProduct) {
@@ -46,7 +61,7 @@ const UpdateProductModal = ({
           price: product.price,
           description: product.description,
           categoryname: product.categoryname,
-          image: product.image, // Initialize image key to handle updates
+          image: product.imagename, // Initialize image key to handle updates
         });
         // setIsFormDirty(false); // Reset dirty flag
         // setFormErrors({}); // Reset errors
@@ -173,11 +188,15 @@ const UpdateProductModal = ({
             onChange={handleFieldChange}
           />
         </FormControl>
-        {updatedProduct.image && updatedProduct.image instanceof File && (
-          <Box sx={{ mt: 2, textAlign: "center" }}>
-            <Typography variant="subtitle2">Image Preview:</Typography>
+        {imagePreview && (
+          <Box sx={{ mt: 1 }}>
+            <Typography variant="subtitle2">
+              {updatedProduct.image instanceof File
+                ? "Selected image for update:"
+                : "Currently displayed image:"}
+            </Typography>
             <img
-              src={URL.createObjectURL(updatedProduct.image)}
+              src={imagePreview}
               alt="Preview"
               style={{ maxWidth: "100%", maxHeight: "150px" }}
             />
