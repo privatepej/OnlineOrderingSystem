@@ -6,9 +6,17 @@ import {
   Typography,
   CardMedia,
   Box,
+  Button,
 } from "@mui/material";
+import { useCart } from "../../hooks/CartContext";
 
 const ProductCard = ({ product }) => {
+  const { addToCart } = useCart();
+
+  const handleAddToCart = () => {
+    addToCart(product.id, 1);
+  };
+
   return (
     <Card
       sx={{
@@ -68,6 +76,9 @@ const ProductCard = ({ product }) => {
           </Typography>
         </Box>
         <Typography variant="h6">Price: ${product.price}</Typography>
+        <Button variant="contained" color="primary" onClick={handleAddToCart}>
+          Add to Cart
+        </Button>
       </CardContent>
     </Card>
   );

@@ -172,3 +172,4 @@ ALTER TABLE product
 ALTER COLUMN categoryname SET DEFAULT 'Uncategorized';
 
 
+ALTER TABLE user_orders ADD COLUMN status VARCHAR(10) DEFAULT 'CART';

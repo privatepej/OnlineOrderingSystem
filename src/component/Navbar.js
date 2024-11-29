@@ -8,7 +8,7 @@ import { Box } from "@mui/material";
 
 const Navbar = () => {
   return (
-    <AppBar position="static">
+    <AppBar position="sticky">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box sx={{ display: "flex", alignItems: "center" }}>

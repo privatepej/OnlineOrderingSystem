@@ -10,6 +10,7 @@ import PrivateRoute from "./PrivateRoute";
 import LoginPage from "../pages/LoginPage";
 import SignupPage from "../pages/SignupPage";
 import AlreadyLoggedInRoute from "./AlreadyLoggedInRoute";
+import CartPage from "../pages/CartPage";
 
 const AppRoutes = () => {
   return (
@@ -27,6 +28,7 @@ const AppRoutes = () => {
         <Route path="/products" element={<Products />} />
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/cart" element={<CartPage />} /> {/* Cart Page */}
         <Route
           path="/login"
           element={
@@ -43,7 +45,6 @@ const AppRoutes = () => {
             </AlreadyLoggedInRoute>
           }
         />
-
         <Route
           path="/admin/signup"
           element={
@@ -52,7 +53,6 @@ const AppRoutes = () => {
             </PrivateRoute>
           }
         />
-
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>

@@ -249,7 +249,7 @@ const Products = () => {
   }
 
   return (
-    <Container>
+    <Container sx={{ mb: 50 }}>
       <Box sx={{ textAlign: "center", mb: 4 }}>
         <Typography variant="h4" gutterBottom>
           Product Catalog

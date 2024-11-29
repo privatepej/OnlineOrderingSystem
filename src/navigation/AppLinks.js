@@ -1,10 +1,14 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Button } from "@mui/material";
+import { Badge, Button } from "@mui/material";
 import { useAuth } from "../hooks/AuthProvider";
+import { useCart } from "../hooks/CartContext";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart"; // Import the cart icon
 
 const AppLinks = () => {
   const { user, logout } = useAuth();
+  const { cart } = useCart();
+
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -17,6 +21,17 @@ const AppLinks = () => {
     { path: "/products", label: "Products" },
     { path: "/aboutus", label: "AboutUs" },
     { path: "/contact", label: "Contact" },
+    {
+      path: "/cart",
+      label: (
+        <Badge
+          badgeContent={cart?.cartItems?.length || 0} // Show cart item count
+          color="secondary"
+        >
+          <ShoppingCartIcon />
+        </Badge>
+      ),
+    },
     ...(user?.role === "ADMINISTRATOR"
       ? [
           { path: "/admin/signup", label: "Add User" },

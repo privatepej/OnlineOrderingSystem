@@ -148,6 +148,53 @@ const Api = {
       return false;
     }
   },
+
+  // Cart API
+  addToCart: async (userId, productId, quantity = 1) => {
+    try {
+      const response = await axiosInstance.post(
+        `/cart/add?userId=${userId}&productId=${productId}&quantity=${quantity}`
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Error adding to cart:", error.message);
+      throw error;
+    }
+  },
+
+  viewCart: async (userId) => {
+    try {
+      const response = await axiosInstance.get(`/cart/view?userId=${userId}`);
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching cart:", error.message);
+      throw error;
+    }
+  },
+
+  removeCartItem: async (userId, productId) => {
+    try {
+      const response = await axiosInstance.delete(
+        `/cart/remove-item?userId=${userId}&productId=${productId}`
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Error removing cart item:", error.message);
+      throw error;
+    }
+  },
+
+  clearCart: async (userId) => {
+    try {
+      const response = await axiosInstance.delete(
+        `/cart/clear?userId=${userId}`
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Error clearing cart:", error.message);
+      throw error;
+    }
+  },
 };
 
 export default Api;
