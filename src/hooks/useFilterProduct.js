@@ -1,23 +1,22 @@
 import { useMemo } from "react";
 
-const useFilteredProducts = (products = [], selectedCategory, searchQuery) => {
+const useFilteredProducts = (products, selectedCategory, searchQuery) => {
   return useMemo(() => {
-    let result = products;
+    let filtered = [...products];
 
     if (selectedCategory) {
-      result = result.filter(
+      filtered = filtered.filter(
         (product) => product.categoryname === selectedCategory
       );
     }
 
-    if (searchQuery.trim()) {
-      result = result.filter((product) =>
+    if (searchQuery) {
+      filtered = filtered.filter((product) =>
         product.pname.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
 
-    return result || [];
+    return filtered;
   }, [products, selectedCategory, searchQuery]);
 };
-
 export default useFilteredProducts;

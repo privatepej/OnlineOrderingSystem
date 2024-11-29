@@ -1,224 +1,74 @@
-import React, { useState, useMemo } from "react";
-import Api from "../api/api";
+import React, { useMemo, useState } from "react";
 import ProductModal from "../component/product/ProductModal";
-import { validateForm } from "../utils/Validation";
 import { Container, Typography, Box } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import DeleteProductModal from "../component/category/DeleteProductModal.js";
 import ProductCard from "../component/product/ProductCard";
-import Loading from "../component/Loading";
 import CustomAlert from "../component/CustomAlert";
 import UpdateProductModal from "../component/product/UpdateProductModal";
 import useFilteredProducts from "../hooks/useFilterProduct";
-import useProduct from "../hooks/useProduct";
-import useModal from "../hooks/useModal";
 import CategoryModal from "../component/category/CategoryModal";
 import DeleteCategoryModal from "../component/category/DeleteCategoryModal";
 import UpdateCategoryModal from "../component/category/UpdateCategoryModal";
 import useAlert from "../hooks/useAlert";
 import AdminButtons from "../component/AdminButtons";
 import ProductFilter from "../component/product/ProductFilter";
+import useProductModalHandlers from "../hooks/useProductModalHandlers";
+import useProductActions from "../hooks/useProductAndCategoryActions";
+import Loading from "../component/Loading";
 
 const Products = () => {
-  const [fieldErrors, setFieldErrors] = useState({});
-  const [selectedProduct, setSelectedProduct] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
-  const [newProduct, setNewProduct] = useState({
-    pname: "",
-    price: "",
-    description: "",
-    categoryname: "",
+
+  const { alertMessage, showAlert } = useAlert();
+  const {
+    addModal,
+    deleteModal,
+    updateModal,
+    addCategoryModal,
+    deleteCategoryModal,
+    updateCategoryModal,
+    fieldErrors,
+    setFieldErrors,
+    newProduct,
+    handleChange,
+    selectedProduct,
+    setSelectedProduct,
+    selectedCategory,
+    setSelectedCategory,
+    handleCloseModal,
+    handleCloseDeleteModal,
+    handleCloseUpdateModal,
+  } = useProductModalHandlers();
+
+  const {
+    loading,
+    categories,
+    handleAddCategory,
+    handleDeleteCategory,
+    handleUpdateCategory,
+    products,
+    handleAddProduct,
+    handleDeleteProduct,
+    handleUpdateProduct,
+  } = useProductActions({
+    showAlert,
   });
 
-  const { products, categories, loading, setProducts, setCategories } =
-    useProduct();
-  const { alertMessage, showAlert } = useAlert();
-
-  const addModal = useModal();
-  const deleteModal = useModal();
-  const updateModal = useModal();
-  const addCategoryModal = useModal();
-  const deleteCategoryModal = useModal();
-  const updateCategoryModal = useModal();
-
-  const handleCloseModal = () => {
-    setNewProduct({ pname: "", price: "", description: "", categoryname: "" });
-    setFieldErrors({});
-    addModal.closeModal();
+  const handleAddCategorySubmit = (newCategory) => {
+    handleAddCategory(newCategory, addCategoryModal.closeModal);
   };
 
-  const handleCloseDeleteModal = () => {
-    setSelectedProduct("");
-    deleteModal.closeModal();
+  const handleDeleteCategorySubmit = (categoryName) => {
+    handleDeleteCategory(categoryName, deleteCategoryModal.closeModal);
   };
 
-  const handleCloseUpdateModal = () => {
-    updateModal.closeModal();
+  const handleUpdateCategorySubmit = (updatedCategory) => {
+    handleUpdateCategory(updatedCategory, updateCategoryModal.closeModal);
   };
 
-  const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    setFieldErrors((prev) => ({ ...prev, [name]: "" }));
-    setNewProduct((prev) => ({
-      ...prev,
-      [name]: files ? files[0] : value, // Attach the file object
-    }));
-  };
-
-  const handleAddProduct = async () => {
-    const errors = validateForm(newProduct);
-    if (Object.keys(errors).length > 0) {
-      setFieldErrors(errors);
-      return;
-    }
-
-    const isDuplicate = products.some(
-      (product) =>
-        product.pname.toLowerCase() === newProduct.pname.toLowerCase()
-    );
-
-    if (isDuplicate) {
-      setFieldErrors((prev) => ({
-        ...prev,
-        pname: "Product name already exists. Please use a different name.",
-      }));
-      return;
-    }
-
-    try {
-      const formData = new FormData();
-      formData.append("pname", newProduct.pname);
-      formData.append("price", newProduct.price);
-      formData.append("description", newProduct.description);
-      formData.append("categoryname", newProduct.categoryname);
-      if (newProduct.image) {
-        formData.append("imagename", newProduct.image);
-      }
-
-      const savedProduct = await Api.addProduct(formData);
-      setProducts((prev) => [...prev, savedProduct]);
-      handleCloseModal();
-      showAlert("Product added successfully!");
-    } catch (err) {
-      if (err.response && err.response.status === 409) {
-        const errorMessage = err.response.data;
-
-        if (errorMessage.includes("Product")) {
-          setFieldErrors({ pname: errorMessage });
-        } else if (errorMessage.includes("Image")) {
-          setFieldErrors({ image: errorMessage });
-        } else {
-          setFieldErrors({
-            general: "Conflict error. Please check your inputs.",
-          });
-        }
-      } else {
-        console.error("Error adding product:", err);
-        showAlert("Failed to add product. Please try again.");
-      }
-    }
-  };
-
-  const handleDeleteProduct = async () => {
-    console.log("Delete initiated for:", selectedProduct);
-    try {
-      await Api.deleteProduct(selectedProduct);
-      setProducts((prev) =>
-        prev.filter((product) => product.pname !== selectedProduct)
-      );
-      showAlert(`Product "${selectedProduct}" deleted successfully!`);
-      handleCloseDeleteModal();
-    } catch (err) {
-      console.error("Failed to delete product:", err);
-    }
-  };
-
-  const handleUpdateProduct = async (product) => {
-    const formData = new FormData();
-    formData.append("id", product.id);
-    formData.append("pname", product.pname);
-    formData.append("price", product.price);
-    formData.append("description", product.description);
-    formData.append("categoryname", product.categoryname);
-
-    if (product.image instanceof File) {
-      formData.append("imagename", product.image);
-    }
-
-    try {
-      const updatedProduct = await Api.updateProduct(formData);
-      setProducts((prevProducts) =>
-        prevProducts.map((p) => {
-          if (p.id === updatedProduct.id) {
-            const updated = { ...updatedProduct };
-            if (!updated.imagename) {
-              updated.imagename = p.imagename;
-            }
-            return updated;
-          }
-          return p;
-        })
-      );
-      showAlert("Product updated successfully!");
-      handleCloseUpdateModal();
-    } catch (err) {
-      console.error("Error updating product:", err);
-    }
-  };
-
-  const handleAddCategory = async (newCategory) => {
-    try {
-      await Api.addCategory(newCategory); // Call API to add the category
-      setCategories((prev) => [...prev, newCategory]); // Update categories state
-      showAlert("Category added successfully!");
-      addCategoryModal.closeModal();
-    } catch (err) {
-      console.error("Failed to add category:", err);
-      showAlert("Failed to add category. Please try again.");
-    }
-  };
-
-  const handleDeleteCategory = async (categoryName) => {
-    try {
-      await Api.deleteCategory(categoryName);
-      setCategories((prev) =>
-        prev.filter((category) => category.cname !== categoryName)
-      );
-      setProducts((prev) =>
-        prev.map((product) =>
-          product.categoryname === categoryName
-            ? { ...product, categoryname: "Uncategorized" }
-            : product
-        )
-      );
-
-      showAlert(`Category "${categoryName}" deleted successfully!`);
-      deleteCategoryModal.closeModal();
-    } catch (err) {
-      console.error("Failed to delete category:", err);
-      showAlert("Failed to delete category. Please try again.");
-    }
-  };
-
-  const handleUpdateCategory = async ({ id, newName }) => {
-    try {
-      await Api.updateCategory({ id, newName });
-      setCategories((prev) =>
-        prev.map((cat) => (cat.id === id ? { ...cat, cname: newName } : cat))
-      );
-      setProducts((prev) =>
-        prev.map((product) =>
-          product.categoryname === categories.find((cat) => cat.id === id).cname
-            ? { ...product, categoryname: newName }
-            : product
-        )
-      );
-      showAlert("Category updated successfully!");
-      updateCategoryModal.closeModal();
-    } catch (err) {
-      console.error("Failed to update category:", err);
-    }
+  const handleAddProductSubmit = () => {
+    handleAddProduct(newProduct, setFieldErrors, handleCloseModal);
   };
 
   const filteredProducts = useFilteredProducts(
@@ -289,7 +139,7 @@ const Products = () => {
       <ProductModal
         isOpen={addModal.isOpen}
         onClose={handleCloseModal}
-        onSubmit={handleAddProduct}
+        onSubmit={handleAddProductSubmit}
         product={newProduct}
         categories={categories}
         fieldErrors={fieldErrors}
@@ -298,7 +148,9 @@ const Products = () => {
       <DeleteProductModal
         isOpen={deleteModal.isOpen}
         onClose={handleCloseDeleteModal}
-        onConfirm={handleDeleteProduct}
+        onConfirm={() =>
+          handleDeleteProduct(selectedProduct, handleCloseDeleteModal)
+        }
         products={Array.isArray(products) ? products : []} // Guard against bad data
         selectedProduct={selectedProduct}
         setSelectedProduct={setSelectedProduct}
@@ -308,12 +160,14 @@ const Products = () => {
         onClose={handleCloseUpdateModal}
         products={products}
         categories={categories}
-        onUpdate={handleUpdateProduct}
+        onUpdate={(product) =>
+          handleUpdateProduct(product, handleCloseUpdateModal)
+        } // Update handler
       />
       <CategoryModal
         isOpen={addCategoryModal.isOpen}
         onClose={addCategoryModal.closeModal}
-        onSubmit={handleAddCategory}
+        onSubmit={handleAddCategorySubmit}
       />
       <DeleteCategoryModal
         isOpen={deleteCategoryModal.isOpen}
@@ -321,7 +175,7 @@ const Products = () => {
         categories={categories.filter(
           (category) => category.cname !== "Uncategorized"
         )}
-        onConfirm={handleDeleteCategory}
+        onUpdate={handleDeleteCategorySubmit}
       />
 
       <UpdateCategoryModal
@@ -330,7 +184,7 @@ const Products = () => {
         categories={categories.filter(
           (category) => category.cname !== "Uncategorized"
         )}
-        onUpdate={handleUpdateCategory}
+        onUpdate={handleUpdateCategorySubmit}
       />
     </Container>
   );

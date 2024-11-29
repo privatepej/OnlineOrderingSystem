@@ -139,7 +139,7 @@ const UpdateProductModal = ({
       <DialogTitle>Update Product</DialogTitle>
       <DialogContent>
         <Alert severity="info" sx={{ mb: 2 }}>
-          Please fill out all fields to update the product.
+          Please fill up the field that you want to update.
         </Alert>
 
         <FormControl fullWidth sx={{ mb: 2 }}>

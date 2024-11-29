@@ -1,14 +1,13 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Badge, Button } from "@mui/material";
 import { useAuth } from "../hooks/AuthProvider";
 import { useCart } from "../hooks/CartContext";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart"; // Import the cart icon
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 const AppLinks = () => {
   const { user, logout } = useAuth();
   const { cart } = useCart();
-
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -16,32 +15,38 @@ const AppLinks = () => {
     navigate("/login");
   };
 
-  const links = [
-    { path: "/", label: "Home" },
-    { path: "/products", label: "Products" },
-    { path: "/aboutus", label: "AboutUs" },
-    { path: "/contact", label: "Contact" },
-  ];
+  const links = useMemo(() => {
+    const baseLinks = [
+      { path: "/", label: "Home" },
+      { path: "/products", label: "Products" },
+      { path: "/aboutus", label: "About Us" },
+      { path: "/contact", label: "Contact" },
+    ];
 
-  if (user?.role === "CUSTOMER") {
-    links.push({
-      path: "/cart",
-      label: (
-        <Badge badgeContent={cart?.cartItems?.length || 0} color="secondary">
-          <ShoppingCartIcon />
-        </Badge>
-      ),
-    });
-  }
+    if (user?.role === "CUSTOMER") {
+      baseLinks.push({
+        path: "/cart",
+        label: (
+          <Badge badgeContent={cart?.cartItems?.length || 0} color="secondary">
+            <ShoppingCartIcon />
+          </Badge>
+        ),
+      });
+    }
 
-  if (user?.role === "ADMINISTRATOR") {
-    links.push({ path: "/admin/signup", label: "Add User" });
-    links.push({ path: "/dashboard", label: "Dashboard" });
-  }
+    if (user?.role === "ADMINISTRATOR") {
+      baseLinks.push(
+        { path: "/admin/signup", label: "Add User" },
+        { path: "/dashboard", label: "Dashboard" }
+      );
+    }
 
-  if (user?.role === "STAFF") {
-    links.push({ path: "/dashboard", label: "Dashboard" });
-  }
+    if (user?.role === "STAFF") {
+      baseLinks.push({ path: "/dashboard", label: "Dashboard" });
+    }
+
+    return baseLinks;
+  }, [user, cart]);
 
   return (
     <>

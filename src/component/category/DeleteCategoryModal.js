@@ -12,12 +12,12 @@ import {
   Alert,
 } from "@mui/material";
 
-const DeleteCategoryModal = ({ isOpen, onClose, categories, onConfirm }) => {
+const DeleteCategoryModal = ({ isOpen, onClose, categories, onUpdate }) => {
   const [selectedCategory, setSelectedCategory] = useState("");
 
   const handleDelete = () => {
     if (selectedCategory) {
-      onConfirm(selectedCategory);
+      onUpdate(selectedCategory);
       setSelectedCategory("");
     }
   };

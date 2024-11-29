@@ -12,57 +12,75 @@ import SignupPage from "../pages/SignupPage";
 import AlreadyLoggedInRoute from "./AlreadyLoggedInRoute";
 import CartPage from "../pages/CartPage";
 
+const publicRoutes = [
+  { path: "/", element: <Homepage /> },
+  { path: "/products", element: <Products /> },
+  { path: "/aboutus", element: <AboutUs /> },
+  { path: "/contact", element: <Contact /> },
+];
+
+const privateRoutes = [
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRoute roles={["ADMINISTRATOR", "STAFF"]}>
+        <Dashboard />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/cart",
+    element: (
+      <PrivateRoute roles={["CUSTOMER"]}>
+        <CartPage />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/admin/signup",
+    element: (
+      <PrivateRoute roles={["ADMINISTRATOR"]}>
+        <SignupPage />
+      </PrivateRoute>
+    ),
+  },
+];
+
+const authRoutes = [
+  {
+    path: "/login",
+    element: (
+      <AlreadyLoggedInRoute>
+        <LoginPage />
+      </AlreadyLoggedInRoute>
+    ),
+  },
+  {
+    path: "/signup",
+    element: (
+      <AlreadyLoggedInRoute>
+        <SignupPage />
+      </AlreadyLoggedInRoute>
+    ),
+  },
+];
+
 const AppRoutes = () => {
   return (
-    <>
-      <Routes>
-        <Route path="/" element={<Homepage />} />
-        <Route
-          path="/dashboard"
-          element={
-            <PrivateRoute roles={["ADMINISTRATOR", "STAFF"]}>
-              <Dashboard />
-            </PrivateRoute>
-          }
-        />
-        <Route path="/products" element={<Products />} />
-        <Route path="/aboutus" element={<AboutUs />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route
-          path="/cart"
-          element={
-            <PrivateRoute roles={["CUSTOMER"]}>
-              <CartPage />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <AlreadyLoggedInRoute>
-              <LoginPage />
-            </AlreadyLoggedInRoute>
-          }
-        />
-        <Route
-          path="/signup"
-          element={
-            <AlreadyLoggedInRoute>
-              <SignupPage />
-            </AlreadyLoggedInRoute>
-          }
-        />
-        <Route
-          path="/admin/signup"
-          element={
-            <PrivateRoute roles={["ADMINISTRATOR"]}>
-              <SignupPage />
-            </PrivateRoute>
-          }
-        />
-        <Route path="*" element={<ErrorPage />} />
-      </Routes>
-    </>
+    <Routes>
+      {publicRoutes.map(({ path, element }) => (
+        <Route key={path} path={path} element={element} />
+      ))}
+
+      {privateRoutes.map(({ path, element }) => (
+        <Route key={path} path={path} element={element} />
+      ))}
+
+      {authRoutes.map(({ path, element }) => (
+        <Route key={path} path={path} element={element} />
+      ))}
+      <Route path="*" element={<ErrorPage />} />
+    </Routes>
   );
 };
 

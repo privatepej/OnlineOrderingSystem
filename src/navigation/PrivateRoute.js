@@ -1,15 +1,21 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../hooks/AuthProvider";
 
 const PrivateRoute = ({ children, roles }) => {
   const { user } = useAuth();
 
+  const hasAccess = useMemo(() => {
+    if (!user) return false;
+    if (!roles) return true;
+    return roles.includes(user.role);
+  }, [user, roles]);
+
   if (!user) {
     return <Navigate to="/login" />;
   }
-  console.log(user);
-  if (roles && !roles.includes(user.role)) {
+
+  if (!hasAccess) {
     return <Navigate to="/" />;
   }
 
