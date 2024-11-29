@@ -21,26 +21,27 @@ const AppLinks = () => {
     { path: "/products", label: "Products" },
     { path: "/aboutus", label: "AboutUs" },
     { path: "/contact", label: "Contact" },
-    {
+  ];
+
+  if (user?.role === "CUSTOMER") {
+    links.push({
       path: "/cart",
       label: (
-        <Badge
-          badgeContent={cart?.cartItems?.length || 0} // Show cart item count
-          color="secondary"
-        >
+        <Badge badgeContent={cart?.cartItems?.length || 0} color="secondary">
           <ShoppingCartIcon />
         </Badge>
       ),
-    },
-    ...(user?.role === "ADMINISTRATOR"
-      ? [
-          { path: "/admin/signup", label: "Add User" },
-          { path: "/dashboard", label: "Dashboard" },
-        ]
-      : user?.role === "STAFF"
-      ? [{ path: "/dashboard", label: "Dashboard" }]
-      : []),
-  ];
+    });
+  }
+
+  if (user?.role === "ADMINISTRATOR") {
+    links.push({ path: "/admin/signup", label: "Add User" });
+    links.push({ path: "/dashboard", label: "Dashboard" });
+  }
+
+  if (user?.role === "STAFF") {
+    links.push({ path: "/dashboard", label: "Dashboard" });
+  }
 
   return (
     <>

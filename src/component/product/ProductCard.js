@@ -9,9 +9,11 @@ import {
   Button,
 } from "@mui/material";
 import { useCart } from "../../hooks/CartContext";
+import { useAuth } from "../../hooks/AuthProvider";
 
 const ProductCard = ({ product }) => {
   const { addToCart } = useCart();
+  const { user } = useAuth();
 
   const handleAddToCart = () => {
     addToCart(product.id, 1);
@@ -76,9 +78,11 @@ const ProductCard = ({ product }) => {
           </Typography>
         </Box>
         <Typography variant="h6">Price: ${product.price}</Typography>
-        <Button variant="contained" color="primary" onClick={handleAddToCart}>
-          Add to Cart
-        </Button>
+        {user?.role === "CUSTOMER" && (
+          <Button variant="contained" color="primary" onClick={handleAddToCart}>
+            Add to Cart
+          </Button>
+        )}
       </CardContent>
     </Card>
   );
