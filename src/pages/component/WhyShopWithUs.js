@@ -1,8 +1,11 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 const WhyShopWithUs = () => {
+  const { t } = useTranslation("homePage");
+
   return (
     <Box
       sx={{
@@ -38,7 +41,7 @@ const WhyShopWithUs = () => {
             mb: 3,
           }}
         >
-          Why Shop With Us?
+          {t("WHY_SHOP_TITLE")}
         </Typography>
         <Box sx={{ textAlign: "left", color: "white" }}>
           <Typography
@@ -47,8 +50,7 @@ const WhyShopWithUs = () => {
               mb: 2,
             }}
           >
-            ✅ Convenience at Your Fingertips: Order your favorite meals
-            anytime, anywhere.
+            {t("WHY_SHOP_CONVENIENCE")}
           </Typography>
           <Typography
             variant="h6"
@@ -56,8 +58,7 @@ const WhyShopWithUs = () => {
               mb: 2,
             }}
           >
-            ✅ Affordable Prices: Enjoy great deals and discounts on delicious
-            meals.
+            {t("WHY_SHOP_AFFORDABLE")}
           </Typography>
           <Typography
             variant="h6"
@@ -65,8 +66,7 @@ const WhyShopWithUs = () => {
               mb: 2,
             }}
           >
-            ✅ Fast Delivery: Get your meals delivered hot and fresh in 30
-            minutes or less.
+            {t("WHY_SHOP_FAST")}
           </Typography>
           <Typography
             variant="h6"
@@ -74,8 +74,7 @@ const WhyShopWithUs = () => {
               mb: 2,
             }}
           >
-            ✅ Variety of Choices: Choose from a wide range of cuisines and
-            dishes.
+            {t("WHY_SHOP_VARIETY")}
           </Typography>
           <Typography
             variant="h6"
@@ -83,7 +82,7 @@ const WhyShopWithUs = () => {
               mb: 2,
             }}
           >
-            ✅ Safe Transactions: Your data and payments are secure with us.
+            {t("WHY_SHOP_SECURE")}
           </Typography>
         </Box>
       </Box>

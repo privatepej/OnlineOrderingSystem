@@ -1,7 +1,10 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 const AboutUs = () => {
+  const { t } = useTranslation("aboutUs");
+
   return (
     <Box
       sx={{
@@ -35,7 +38,7 @@ const AboutUs = () => {
             marginBottom: "20px",
           }}
         >
-          About Us
+          {t("ABOUT_US")}
         </Typography>
 
         <Box sx={{ width: "100%" }}>
@@ -43,7 +46,7 @@ const AboutUs = () => {
             variant="h2"
             sx={{ fontSize: 32, textAlign: "left", marginBottom: "15px" }}
           >
-            History
+            {t("HISTORY")}
           </Typography>
         </Box>
         <Box
@@ -56,7 +59,7 @@ const AboutUs = () => {
         >
           <img
             src="./img/png/history.jpg"
-            alt="History"
+            alt={t("HISTORY")}
             width="500px"
             height="300px"
             style={{ borderRadius: "10px", boxShadow: "2px 4px #888888" }}
@@ -65,11 +68,7 @@ const AboutUs = () => {
             variant="body1"
             sx={{ fontSize: 16, lineHeight: 1.8, textAlign: "justify" }}
           >
-            BootMart began with a simple mission: to make food ordering quick,
-            easy, and accessible for everyone. From humble beginnings serving
-            college cafeterias and small take-out restaurants, we’ve grown into
-            a trusted partner for food delivery, offering a seamless platform
-            for businesses and customers alike.
+            {t("HISTORY_DESCRIPTION")}
           </Typography>
         </Box>
 
@@ -78,7 +77,7 @@ const AboutUs = () => {
             variant="h2"
             sx={{ fontSize: 32, textAlign: "left", marginBottom: "15px" }}
           >
-            Our Company
+            {t("OUR_SHOP")}
           </Typography>
         </Box>
         <Box
@@ -93,15 +92,11 @@ const AboutUs = () => {
             variant="body1"
             sx={{ fontSize: 16, lineHeight: 1.8, textAlign: "justify" }}
           >
-            At BootMart, we believe in the power of connection. We partner with
-            a wide range of vendors to bring customers the meals they love,
-            delivered with speed and reliability. Our team is dedicated to
-            enhancing the online food ordering experience by prioritizing
-            customer satisfaction, secure payments, and timely deliveries.
+            {t("OUR_SHOP_DESCRIPTION")}
           </Typography>
           <img
             src="./img/png/pizza-store2.jpg"
-            alt="Pizza Store"
+            alt={t("OUR_COMPANY")}
             width="500px"
             height="300px"
             style={{ borderRadius: "10px", boxShadow: "2px 4px #888888" }}

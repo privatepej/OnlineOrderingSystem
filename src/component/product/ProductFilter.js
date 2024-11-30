@@ -6,6 +6,7 @@ import {
   MenuItem,
   TextField,
 } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 const ProductFilter = ({
   selectedCategory,
@@ -14,16 +15,18 @@ const ProductFilter = ({
   setSearchQuery,
   categories,
 }) => {
+  const { t } = useTranslation("productFilter");
+
   return (
     <Box sx={{ display: "flex", justifyContent: "start", mb: 3, flex: 1 }}>
       <FormControl sx={{ flex: 0.94 }}>
-        <InputLabel>Sort by Category</InputLabel>
+        <InputLabel>{t("SORT_CATEGORY")}</InputLabel>
         <Select
-          label="Sort by Category"
+          label={t("SORT_CATEGORY")}
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
         >
-          <MenuItem value="">All Categories</MenuItem>
+          <MenuItem value="">{t("ALL_CATEGORIES")}</MenuItem>
           {categories.map((category, index) => (
             <MenuItem key={index} value={category.cname}>
               {category.cname}
@@ -33,7 +36,7 @@ const ProductFilter = ({
       </FormControl>
 
       <TextField
-        label="Search Products"
+        label={t("SEARCH_PRODUCT")}
         variant="outlined"
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}

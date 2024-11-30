@@ -12,26 +12,25 @@ export const CartProvider = ({ children }) => {
 
   useEffect(() => {
     if (userId) {
-      // Fetch the cart for the logged-in user
       const fetchCart = async () => {
         try {
           const cartData = await Api.viewCart(userId);
           setCart(cartData);
         } catch (error) {
           console.error("Error fetching cart:", error);
-          setCart({ cartItems: [], cartTotal: 0.0 }); // Set an empty cart on error
+          setCart({ cartItems: [], cartTotal: 0.0 }); 
         }
       };
       fetchCart();
     } else {
       setCart(null);
     }
-  }, [userId]); // Trigger fetch whenever the user logs in or changes
+  }, [userId]); 
 
   const addToCart = async (productId, quantity) => {
     try {
       await Api.addToCart(userId, productId, quantity);
-      const updatedCart = await Api.viewCart(userId); // Refresh cart after adding
+      const updatedCart = await Api.viewCart(userId);
       setCart(updatedCart);
     } catch (error) {
       console.error("Error adding to cart:", error);
@@ -41,7 +40,7 @@ export const CartProvider = ({ children }) => {
   const removeCartItem = async (productId) => {
     try {
       await Api.removeCartItem(userId, productId);
-      const updatedCart = await Api.viewCart(userId); // Refresh cart after removing
+      const updatedCart = await Api.viewCart(userId); 
       setCart(updatedCart);
     } catch (error) {
       console.error("Error removing item:", error);
@@ -51,7 +50,7 @@ export const CartProvider = ({ children }) => {
   const clearCart = async () => {
     try {
       await Api.clearCart(userId);
-      setCart({ cartItems: [], cartTotal: 0.0 }); // Clear the cart in the context
+      setCart({ cartItems: [], cartTotal: 0.0 }); 
     } catch (error) {
       console.error("Error clearing cart:", error);
     }
@@ -66,7 +65,6 @@ export const CartProvider = ({ children }) => {
   );
 };
 
-// Custom hook for consuming the cart context
 export const useCart = () => {
   return useContext(CartContext);
 };

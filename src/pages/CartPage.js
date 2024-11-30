@@ -16,9 +16,11 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useCart } from "../hooks/CartContext";
 import Loading from "../component/Loading";
+import { useTranslation } from "react-i18next";
 
 const CartPage = () => {
   const { cart, removeCartItem, clearCart } = useCart();
+  const { t } = useTranslation("cart");
 
   if (!cart) {
     return <Loading />;
@@ -31,7 +33,7 @@ const CartPage = () => {
         gutterBottom
         sx={{ fontWeight: "bold", color: "#5d9488" }}
       >
-        Your Cart
+        {t("YOUR_CART")}
       </Typography>
 
       {cart.cartItems.length > 0 ? (
@@ -74,8 +76,8 @@ const CartPage = () => {
                       }
                       secondary={
                         <Typography variant="body2" color="textSecondary">
-                          Price: ₱{item.price.toFixed(2)} | Total: ₱
-                          {item.totalPrice.toFixed(2)}
+                          {t("PRICE")}: ₱{item.price.toFixed(2)} | {t("TOTAL")}:
+                          ₱{item.totalPrice.toFixed(2)}
                         </Typography>
                       }
                     />
@@ -102,10 +104,9 @@ const CartPage = () => {
               variant="h6"
               sx={{ mt: 3, fontWeight: "bold", color: "#0e5026" }}
             >
-              Cart Total: ₱{cart.cartTotal.toFixed(2)}
+              {t("CART_TOTAL")}: ₱{cart.cartTotal.toFixed(2)}
             </Typography>
 
-            {/* Clear Cart Button */}
             <Box
               sx={{
                 display: "flex",
@@ -124,7 +125,7 @@ const CartPage = () => {
                 }}
                 onClick={clearCart}
               >
-                Clear Cart
+                {t("CLEAR_CART")}
               </Button>
             </Box>
           </Paper>
@@ -139,7 +140,7 @@ const CartPage = () => {
             fontSize: "18px",
           }}
         >
-          Your cart is empty.
+          {t("EMPTY_CART")}
         </Typography>
       )}
     </Container>

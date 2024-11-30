@@ -6,9 +6,11 @@ import LocalPizzaIcon from "@mui/icons-material/LocalPizza";
 import IcecreamIcon from "@mui/icons-material/Icecream";
 import LiquorIcon from "@mui/icons-material/Liquor";
 import { useNavigate } from "react-router";
+import { useTranslation } from "react-i18next";
 
 const ShopFor = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation("homePage");
 
   return (
     <Box
@@ -29,11 +31,11 @@ const ShopFor = () => {
         }}
       >
         <Typography variant="h1" sx={{ fontSize: "50px", fontWeight: "bold" }}>
-          SHOP FOR <span style={{ color: "#ffd475" }}>PRODUCTS</span>
+          {t("SHOP_FOR_TITLE")}
+          <span style={{ color: "#ffd475" }}> {t("SHOP_FOR_PRODUCTS")}</span>
         </Typography>
         <Typography variant="h6" sx={{ marginTop: "10px", color: "gray" }}>
-          Discover a variety of options to satisfy your cravings. Explore our
-          categories below!
+          {t("SHOP_FOR_DESC")}
         </Typography>
       </Box>
 
@@ -58,7 +60,7 @@ const ShopFor = () => {
         >
           <FastfoodIcon sx={{ fontSize: "150px", color: "#FF7043" }} />
           <Typography variant="h5" sx={{ fontWeight: "bold", mt: 2 }}>
-            Fast Food
+            {t("FAST_FOOD")}
           </Typography>
         </Box>
 
@@ -73,7 +75,7 @@ const ShopFor = () => {
         >
           <LocalPizzaIcon sx={{ fontSize: "150px", color: "#F57C00" }} />
           <Typography variant="h5" sx={{ fontWeight: "bold", mt: 2 }}>
-            Pizza
+            {t("PIZZA")}
           </Typography>
         </Box>
 
@@ -88,7 +90,7 @@ const ShopFor = () => {
         >
           <IcecreamIcon sx={{ fontSize: "150px", color: "#4FC3F7" }} />
           <Typography variant="h5" sx={{ fontWeight: "bold", mt: 2 }}>
-            Desserts
+            {t("DESSERTS")}
           </Typography>
         </Box>
 
@@ -103,7 +105,7 @@ const ShopFor = () => {
         >
           <LiquorIcon sx={{ fontSize: "150px", color: "#7E57C2" }} />
           <Typography variant="h5" sx={{ fontWeight: "bold", mt: 2 }}>
-            Beverages
+            {t("BEVERAGES")}
           </Typography>
         </Box>
       </Box>
@@ -125,7 +127,7 @@ const ShopFor = () => {
           }}
           onClick={() => navigate("/products")}
         >
-          VIEW ALL PRODUCTS
+          {t("VIEW_ALL_PRODUCTS")}
         </Button>
       </Box>
     </Box>

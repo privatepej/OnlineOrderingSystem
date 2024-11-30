@@ -39,7 +39,7 @@ const useProductModalHandlers = () => {
     setFieldErrors((prev) => ({ ...prev, [name]: "" }));
     setNewProduct((prev) => ({
       ...prev,
-      [name]: files ? files[0] : value, // Attach the file object
+      [name]: files ? files[0] : value,
     }));
   };
 

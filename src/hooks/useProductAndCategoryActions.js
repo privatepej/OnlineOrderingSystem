@@ -62,7 +62,6 @@ const useProductAndCategoryActions = ({ showAlert }) => {
 
       if (newProduct.image && newProduct.image instanceof File) {
         const fileExists = await Api.checkImageExists(newProduct.image.name);
-        console.log("fileExists", fileExists);
         if (fileExists) {
           setFieldErrors((prev) => ({
             ...prev,
@@ -131,11 +130,6 @@ const useProductAndCategoryActions = ({ showAlert }) => {
     }
   };
 
-  useEffect(() => {
-    console.log("Categories updated:", categories);
-  }, [categories]);
-
-  // category
   const handleAddCategory = async (newCategory, handleCloseModal) => {
     try {
       await Api.addCategory(newCategory);
@@ -147,10 +141,6 @@ const useProductAndCategoryActions = ({ showAlert }) => {
       showAlert("Failed to add category. Please try again.", "error");
     }
   };
-
-  useEffect(() => {
-    console.log("Categories updated:", categories);
-  }, [categories]);
 
   const handleDeleteCategory = async (categoryName, handleCloseModal) => {
     try {

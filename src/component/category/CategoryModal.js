@@ -7,8 +7,10 @@ import {
   TextField,
   Button,
 } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 const CategoryModal = ({ isOpen, onClose, onSubmit }) => {
+  const { t } = useTranslation("addCategoryModal");
   const [categoryName, setCategoryName] = useState("");
   const [error, setError] = useState("");
 
@@ -19,7 +21,7 @@ const CategoryModal = ({ isOpen, onClose, onSubmit }) => {
 
   const handleSubmit = () => {
     if (!categoryName.trim()) {
-      setError("Category name is required.");
+      setError(t("ERROR_CATEGORY_NAME_REQUIRE"));
       return;
     }
     onSubmit({ cname: categoryName });
@@ -29,10 +31,10 @@ const CategoryModal = ({ isOpen, onClose, onSubmit }) => {
 
   return (
     <Dialog open={isOpen} onClose={onClose}>
-      <DialogTitle>Add Category</DialogTitle>
+      <DialogTitle>{t("ADD_CATEGORY")}</DialogTitle>
       <DialogContent>
         <TextField
-          label="Category Name"
+          label={t("CATEGORY_NAME")}
           value={categoryName}
           onChange={handleChange}
           fullWidth
@@ -44,10 +46,10 @@ const CategoryModal = ({ isOpen, onClose, onSubmit }) => {
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} color="secondary">
-          Cancel
+          {t("CANCEL")}
         </Button>
         <Button onClick={handleSubmit} color="primary">
-          Add
+          {t("ADD")}
         </Button>
       </DialogActions>
     </Dialog>

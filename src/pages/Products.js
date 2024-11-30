@@ -16,10 +16,12 @@ import ProductFilter from "../component/product/ProductFilter";
 import useProductModalHandlers from "../hooks/useProductModalHandlers";
 import useProductActions from "../hooks/useProductAndCategoryActions";
 import Loading from "../component/Loading";
+import { useTranslation } from "react-i18next";
 
 const Products = () => {
-  const [searchQuery, setSearchQuery] = useState("");
+  const { t } = useTranslation("product");
 
+  const [searchQuery, setSearchQuery] = useState("");
   const { alertMessage, alertSeverity, showAlert } = useAlert();
   const {
     addModal,
@@ -94,10 +96,10 @@ const Products = () => {
           color: "#888",
         }}
       >
-        No products match.
+        {t("NO_PRODUCT_MATCH")}
       </Typography>
     );
-  }, [filteredProducts]);
+  }, [filteredProducts, t]);
 
   if (loading) {
     return <Loading />;
@@ -119,7 +121,7 @@ const Products = () => {
           variant="h4"
           sx={{ fontWeight: "bold", color: "#0e5026", mb: 2 }}
         >
-          Product Catalog
+          {t("PRODUCT_CATALOG")}
         </Typography>
 
         <AdminButtons
@@ -184,7 +186,7 @@ const Products = () => {
         categories={categories}
         onUpdate={(product) =>
           handleUpdateProduct(product, handleCloseUpdateModal)
-        } // Update handler
+        }
       />
       <CategoryModal
         isOpen={addCategoryModal.isOpen}
@@ -195,7 +197,7 @@ const Products = () => {
         isOpen={deleteCategoryModal.isOpen}
         onClose={deleteCategoryModal.closeModal}
         categories={categories.filter(
-          (category) => category.cname !== "Uncategorized"
+          (category) => category.cname !== t("UNCATEGORIZED")
         )}
         onUpdate={handleDeleteCategorySubmit}
       />
@@ -203,7 +205,7 @@ const Products = () => {
         isOpen={updateCategoryModal.isOpen}
         onClose={updateCategoryModal.closeModal}
         categories={categories.filter(
-          (category) => category.cname !== "Uncategorized"
+          (category) => category.cname !== t("UNCATEGORIZED")
         )}
         onUpdate={handleUpdateCategorySubmit}
       />

@@ -11,9 +11,11 @@ import {
   MenuItem,
   Alert,
 } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 const DeleteCategoryModal = ({ isOpen, onClose, categories, onUpdate }) => {
   const [selectedCategory, setSelectedCategory] = useState("");
+  const { t } = useTranslation("deleteCategoryModal");
 
   const handleDelete = () => {
     if (selectedCategory) {
@@ -24,15 +26,15 @@ const DeleteCategoryModal = ({ isOpen, onClose, categories, onUpdate }) => {
 
   return (
     <Dialog open={isOpen} onClose={onClose}>
-      <DialogTitle>Delete Category</DialogTitle>
+      <DialogTitle>{t("DELETE_CATEGORY")}</DialogTitle>
       <DialogContent>
         <Alert severity="warning" sx={{ mb: 2 }}>
-          Warning: Deleting a category will remove it permanently!
+          {t("WARNING_DELETE_CATEGORY")}
         </Alert>
         <FormControl fullWidth>
-          <InputLabel>Select Category</InputLabel>
+          <InputLabel>{t("SELECT_CATEGORY")}</InputLabel>
           <Select
-            label="Select Category"
+            label={t("SELECT_CATEGORY")}
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
           >
@@ -46,14 +48,14 @@ const DeleteCategoryModal = ({ isOpen, onClose, categories, onUpdate }) => {
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} color="secondary">
-          Cancel
+          {t("CANCEL")}
         </Button>
         <Button
           onClick={handleDelete}
           color="error"
           disabled={!selectedCategory}
         >
-          Delete
+          {t("DELETE")}
         </Button>
       </DialogActions>
     </Dialog>

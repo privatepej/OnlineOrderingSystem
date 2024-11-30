@@ -4,8 +4,11 @@ import { Typography } from "@mui/material";
 import FastfoodIcon from "@mui/icons-material/Fastfood";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import VerifiedIcon from "@mui/icons-material/Verified";
+import { useTranslation } from "react-i18next";
 
 const Banner = () => {
+  const { t } = useTranslation("homePage");
+
   return (
     <Box
       sx={{
@@ -26,11 +29,9 @@ const Banner = () => {
         <FastfoodIcon sx={{ fontSize: "100px", color: "#F57C00" }} />
         <Box sx={{ marginLeft: "20px", width: "250px" }}>
           <Typography variant="h2" sx={{ fontWeight: "bold" }}>
-            WIDE MENU
+            {t("WIDE_MENU")}
           </Typography>
-          <Typography variant="h5">
-            Explore a variety of options to satisfy your cravings.
-          </Typography>
+          <Typography variant="h5">{t("WIDE_MENU_DESC")}</Typography>
         </Box>
       </Box>
 
@@ -43,11 +44,9 @@ const Banner = () => {
         <LocalShippingIcon sx={{ fontSize: "100px", color: "#388E3C" }} />
         <Box sx={{ marginLeft: "20px", width: "250px" }}>
           <Typography variant="h2" sx={{ fontWeight: "bold" }}>
-            FREE DELIVERY
+            {t("FREE_DELIVERY")}
           </Typography>
-          <Typography variant="h5">
-            Enjoy free shipping on orders above 500, straight to your door.
-          </Typography>
+          <Typography variant="h5">{t("FREE_DELIVERY_DESC")}</Typography>
         </Box>
       </Box>
 
@@ -60,11 +59,9 @@ const Banner = () => {
         <VerifiedIcon sx={{ fontSize: "100px", color: "#1976D2" }} />
         <Box sx={{ marginLeft: "20px", width: "250px" }}>
           <Typography variant="h2" sx={{ fontWeight: "bold" }}>
-            TOP QUALITY
+            {t("TOP_QUALITY")}
           </Typography>
-          <Typography variant="h5">
-            Only the best for you—top-quality products at unbeatable prices.
-          </Typography>
+          <Typography variant="h5">{t("TOP_QUALITY_DESC")}</Typography>
         </Box>
       </Box>
     </Box>

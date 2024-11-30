@@ -1,7 +1,10 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 const Landing = () => {
+  const { t } = useTranslation("homePage");
+
   return (
     <Box
       sx={{
@@ -36,7 +39,7 @@ const Landing = () => {
             mb: 3,
           }}
         >
-          Delicious Food, Fast and Easy
+          {t("LANDING_PAGE_MAIN_TEXT")}
         </Typography>
 
         <Typography
@@ -49,7 +52,7 @@ const Landing = () => {
             mb: 5,
           }}
         >
-          SBC BootMart - Your Online Food Partner
+          {t("LANDING_PAGE_SUB_TEXT")}
         </Typography>
       </Box>
     </Box>

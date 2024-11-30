@@ -15,6 +15,7 @@ import {
   FormHelperText,
   Box,
 } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 const ProductModal = ({
   isOpen,
@@ -25,6 +26,8 @@ const ProductModal = ({
   fieldErrors,
   handleChange,
 }) => {
+  const { t } = useTranslation("addProductModal");
+
   const [imagePreview, setImagePreview] = useState("");
 
   useEffect(() => {
@@ -41,10 +44,10 @@ const ProductModal = ({
 
   return (
     <Dialog open={isOpen} onClose={onClose}>
-      <DialogTitle>Add Product</DialogTitle>
+      <DialogTitle>{t("ADD_PRODUCT")}</DialogTitle>
       <DialogContent>
         <TextField
-          label="Product Name"
+          label={t("PRODUCT_NAME")}
           name="pname"
           value={product.pname}
           onChange={handleChange}
@@ -55,7 +58,7 @@ const ProductModal = ({
           helperText={fieldErrors.pname}
         />
         <TextField
-          label="Price"
+          label={t("PRICE")}
           name="price"
           type="number"
           value={product.price}
@@ -67,7 +70,7 @@ const ProductModal = ({
           helperText={fieldErrors.price}
         />
         <TextField
-          label="Description"
+          label={t("DESCRIPTION")}
           name="description"
           value={product.description}
           onChange={handleChange}
@@ -79,9 +82,9 @@ const ProductModal = ({
           margin="dense"
           error={!!fieldErrors.categoryname}
         >
-          <InputLabel>Category</InputLabel>
+          <InputLabel>{t("CATEGORY")}</InputLabel>
           <Select
-            label="Category"
+            label={t("CATEGORY")}
             name="categoryname"
             value={product.categoryname}
             onChange={handleChange}
@@ -114,7 +117,7 @@ const ProductModal = ({
           )}
           {imagePreview && (
             <Box sx={{ mt: 1 }}>
-              <Typography variant="subtitle2">Selected image:</Typography>
+              <Typography variant="subtitle2">{t("SELECTED_IMAGE")}</Typography>
               <img
                 src={imagePreview}
                 alt="Preview"
@@ -126,10 +129,10 @@ const ProductModal = ({
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} color="secondary">
-          Cancel
+          {t("CANCEL")}
         </Button>
         <Button onClick={onSubmit} color="primary">
-          Add
+          {t("ADD")}
         </Button>
       </DialogActions>
     </Dialog>

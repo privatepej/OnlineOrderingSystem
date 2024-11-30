@@ -5,9 +5,11 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation("homePage");
 
   return (
     <Box sx={{ backgroundColor: "#f4f4f4" }}>
@@ -33,10 +35,10 @@ const Footer = () => {
             variant="h5"
             sx={{ fontWeight: "bold", marginBottom: "10px" }}
           >
-            ADDRESS
+            {t("ADDRESS")}
           </Typography>
-          <Typography variant="body1">123 Keyland Arnaiz</Typography>
-          <Typography variant="body1">Bootmart City, SBC 12345</Typography>
+          <Typography variant="body1">{t("ADDRESS_LINE_1")}</Typography>
+          <Typography variant="body1">{t("ADDRESS_LINE_2")}</Typography>
         </Box>
 
         <Box
@@ -46,7 +48,6 @@ const Footer = () => {
             alignItems: "flex-start",
             margin: "20px",
             flex: 1,
-
             minWidth: "250px",
           }}
         >
@@ -54,7 +55,7 @@ const Footer = () => {
             variant="h5"
             sx={{ fontWeight: "bold", marginBottom: "10px" }}
           >
-            STORE INFORMATION
+            {t("STORE_INFO")}
           </Typography>
           <Typography
             variant="body1"
@@ -64,12 +65,10 @@ const Footer = () => {
             }}
             onClick={() => navigate("/aboutus")}
           >
-            About Us
+            {t("ABOUT_US_LINK")}
           </Typography>
-          <Typography variant="body1">Phone: +63 (123) 456-7890</Typography>
-          <Typography variant="body1">
-            Email: support@sbcbootmart.com
-          </Typography>
+          <Typography variant="body1">{t("PHONE")}</Typography>
+          <Typography variant="body1">{t("EMAIL")}</Typography>
         </Box>
 
         <Box
@@ -86,11 +85,11 @@ const Footer = () => {
             variant="h5"
             sx={{ fontWeight: "bold", marginBottom: "10px" }}
           >
-            POLICY
+            {t("POLICY")}
           </Typography>
-          <Typography variant="body1">Refund Policy</Typography>
-          <Typography variant="body1">Terms of Use</Typography>
-          <Typography variant="body1">Privacy Policy</Typography>
+          <Typography variant="body1">{t("REFUND_POLICY")}</Typography>
+          <Typography variant="body1">{t("TERMS_OF_USE")}</Typography>
+          <Typography variant="body1">{t("PRIVACY_POLICY")}</Typography>
         </Box>
 
         <Box
@@ -107,10 +106,10 @@ const Footer = () => {
             variant="h5"
             sx={{ fontWeight: "bold", marginBottom: "10px" }}
           >
-            JOIN OUR NEWSLETTER
+            {t("JOIN_NEWSLETTER_TITLE")}
           </Typography>
           <Typography variant="body2" sx={{ marginBottom: "10px" }}>
-            Get the latest updates and offers.
+            {t("JOIN_NEWSLETTER_DESC")}
           </Typography>
           <Box sx={{ display: "flex", gap: "10px", width: "100%" }}>
             <TextField
@@ -132,7 +131,7 @@ const Footer = () => {
                 },
               }}
             >
-              Subscribe
+              {t("SUBSCRIBE")}
             </Button>
           </Box>
         </Box>
@@ -145,7 +144,7 @@ const Footer = () => {
           alignItems: "center",
         }}
       >
-        <Typography variant="body1">Follow us:</Typography>
+        <Typography variant="body1">{t("FOLLOW_US")}</Typography>
         <IconButton
           color="primary"
           onClick={() => window.open("https://www.facebook.com")}
@@ -179,7 +178,7 @@ const Footer = () => {
         }}
       >
         <Typography variant="body2" sx={{ marginBottom: "5px" }}>
-          COPYRIGHT © 2024, SBC BOOTMART. ALL RIGHTS RESERVED.
+          {t("COPYRIGHT")}
         </Typography>
       </Box>
     </Box>

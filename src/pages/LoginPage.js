@@ -10,12 +10,14 @@ import {
   Container,
   Alert,
 } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const { login } = useAuth();
+  const { t } = useTranslation("login");
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -51,7 +53,7 @@ const LoginPage = () => {
           variant="h4"
           sx={{ fontWeight: "bold", color: "#5d9488", marginBottom: "20px" }}
         >
-          Log in
+          {t("LOG_IN")}
         </Typography>
 
         {error && (
@@ -102,7 +104,7 @@ const LoginPage = () => {
               marginTop: "10px",
             }}
           >
-            Sign In
+            {t("SIGN_IN")}
           </Button>
         </Box>
 
@@ -113,7 +115,7 @@ const LoginPage = () => {
           }}
         >
           <Typography variant="body2" sx={{ color: "#888" }}>
-            Don't have an account?
+            {t("DONT_HAVE_ACCOUNT")}
             <Link
               href="/signup"
               sx={{
@@ -123,7 +125,7 @@ const LoginPage = () => {
               }}
             >
               {" "}
-              Sign Up
+              {t("SIGN_UP")}
             </Link>
           </Typography>
         </Box>

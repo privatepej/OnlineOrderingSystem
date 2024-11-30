@@ -13,8 +13,10 @@ import {
   Alert,
 } from "@mui/material";
 import { validateCategoryUpdate } from "../../utils/Validation";
+import { useTranslation } from "react-i18next";
 
 const UpdateCategoryModal = ({ isOpen, onClose, categories, onUpdate }) => {
+  const { t } = useTranslation("updateCategoryModal");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [updatedCategoryName, setUpdatedCategoryName] = useState("");
   const [formErrors, setFormErrors] = useState({});
@@ -52,16 +54,16 @@ const UpdateCategoryModal = ({ isOpen, onClose, categories, onUpdate }) => {
 
   return (
     <Dialog open={isOpen} onClose={handleClose}>
-      <DialogTitle>Update Category</DialogTitle>
+      <DialogTitle>{t("UPDATE_CATEGORY")}</DialogTitle>
       <DialogContent>
         <Alert severity="info" sx={{ mb: 2 }}>
-          Select a category and update its name.
+          {t("SELECT_TO_UPDATE")}
         </Alert>
 
         <FormControl fullWidth sx={{ mb: 2 }}>
-          <InputLabel>Select Category</InputLabel>
+          <InputLabel>{t("SELECT_CATEGORY")}</InputLabel>
           <Select
-            label="Select Category"
+            label={t("SELECT_CATEGORY")}
             value={selectedCategory}
             onChange={handleCategoryChange}
           >
@@ -74,7 +76,7 @@ const UpdateCategoryModal = ({ isOpen, onClose, categories, onUpdate }) => {
         </FormControl>
 
         <TextField
-          label="New Category Name"
+          label={t("NEW_CATEGORY_NAME")}
           name="updatedCategoryName"
           value={updatedCategoryName}
           onChange={handleFieldChange}
@@ -86,14 +88,14 @@ const UpdateCategoryModal = ({ isOpen, onClose, categories, onUpdate }) => {
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="secondary">
-          Cancel
+          {t("CANCEL")}
         </Button>
         <Button
           onClick={handleSave}
           color="primary"
           disabled={!selectedCategory}
         >
-          Save
+          {t("SAVE")}
         </Button>
       </DialogActions>
     </Dialog>

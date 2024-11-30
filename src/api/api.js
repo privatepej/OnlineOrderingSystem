@@ -52,7 +52,6 @@ const Api = {
 
   deleteProduct: async (productName) => {
     try {
-      console.log("deleteProduct", productName);
       const response = await axiosInstance.delete(
         `/product/delete?productName=${productName}`
       );
@@ -85,7 +84,6 @@ const Api = {
   addCategory: async (newCategory) => {
     try {
       const response = await axiosInstance.post("/category/add", newCategory);
-      console.log(response);
       return response.data;
     } catch (error) {
       console.error("Error adding category:", error.message);

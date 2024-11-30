@@ -17,6 +17,7 @@ import {
 } from "@mui/material";
 import { validateFormUpdate } from "../../utils/Validation";
 import Api from "../../api/api";
+import { useTranslation } from "react-i18next";
 
 const UpdateProductModal = ({
   isOpen,
@@ -25,6 +26,7 @@ const UpdateProductModal = ({
   categories,
   onUpdate,
 }) => {
+  const { t } = useTranslation("updateProductModal");
   const [selectedProduct, setSelectedProduct] = useState("");
   const [updatedProduct, setUpdatedProduct] = useState({
     id: "",
@@ -115,7 +117,6 @@ const UpdateProductModal = ({
 
     if (updatedProduct.image && updatedProduct.image instanceof File) {
       const fileExists = await Api.checkImageExists(updatedProduct.image.name);
-      console.log("fileExists", fileExists);
       if (fileExists) {
         setFormErrors((prev) => ({
           ...prev,
@@ -136,16 +137,16 @@ const UpdateProductModal = ({
 
   return (
     <Dialog open={isOpen} onClose={handleClose}>
-      <DialogTitle>Update Product</DialogTitle>
+      <DialogTitle>{t("UPDATE_PRODUCT")}</DialogTitle>
       <DialogContent>
         <Alert severity="info" sx={{ mb: 2 }}>
-          Please fill up the field that you want to update.
+          {t("ALERT_PRODUCT_MODAL")}
         </Alert>
 
         <FormControl fullWidth sx={{ mb: 2 }}>
-          <InputLabel>Select Product</InputLabel>
+          <InputLabel>{t("SELECT_PRODUCT")}</InputLabel>
           <Select
-            label="Select Product"
+            label={t("SELECT_PRODUCT")}
             value={selectedProduct}
             onChange={(e) => setSelectedProduct(e.target.value)}
           >
@@ -158,7 +159,7 @@ const UpdateProductModal = ({
         </FormControl>
 
         <TextField
-          label="Product Name"
+          label={t("PRODUCT_NAME")}
           name="pname"
           value={updatedProduct.pname}
           onChange={handleFieldChange}
@@ -168,7 +169,7 @@ const UpdateProductModal = ({
           helperText={formErrors.pname}
         />
         <TextField
-          label="Price"
+          label={t("PRICE")}
           name="price"
           type="number"
           value={updatedProduct.price}
@@ -179,7 +180,7 @@ const UpdateProductModal = ({
           helperText={formErrors.price}
         />
         <TextField
-          label="Description"
+          label={t("DESCRIPTION")}
           name="description"
           value={updatedProduct.description}
           onChange={handleFieldChange}
@@ -187,7 +188,7 @@ const UpdateProductModal = ({
           margin="dense"
         />
         <FormControl fullWidth margin="dense" error={!!formErrors.categoryname}>
-          <InputLabel>Category</InputLabel>
+          <InputLabel>{t("CATEGORY")}</InputLabel>
           <Select
             label="Category"
             name="categoryname"
@@ -224,8 +225,8 @@ const UpdateProductModal = ({
           <Box sx={{ mt: 1 }}>
             <Typography variant="subtitle2">
               {updatedProduct.image instanceof File
-                ? "Selected image for update:"
-                : "Currently displayed image:"}
+                ? t("SELECTED_IMAGE")
+                : t("CURRENTLY_IMAGE")}
             </Typography>
             <img
               src={imagePreview}
@@ -237,10 +238,10 @@ const UpdateProductModal = ({
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="secondary">
-          Cancel
+          {t("CANCEL")}
         </Button>
         <Button onClick={handleSave} color="primary" disabled={!isFormDirty}>
-          Save
+          {t("SAVE")}
         </Button>
       </DialogActions>
     </Dialog>

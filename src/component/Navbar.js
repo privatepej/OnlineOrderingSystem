@@ -17,12 +17,9 @@ const Navbar = () => {
     >
       <Container>
         <Toolbar disableGutters>
-          {/* Left Section */}
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
           </Box>
-
-          {/* Right Section */}
           <Box sx={{ display: "flex", alignItems: "center", ml: "auto" }}>
             <AppLinks />
           </Box>

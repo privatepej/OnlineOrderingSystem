@@ -1,8 +1,11 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 const BannerPhoto = () => {
+  const { t } = useTranslation("homePage");
+
   return (
     <Box
       sx={{
@@ -37,7 +40,7 @@ const BannerPhoto = () => {
             mb: 2,
           }}
         >
-          Welcome to
+          {t("BANNER_PHOTO_TITLE")}
         </Typography>
         <Typography
           variant="h1"
@@ -48,7 +51,7 @@ const BannerPhoto = () => {
             mb: 3,
           }}
         >
-          BootMart
+          {t("BANNER_PHOTO_SUBTITLE")}
         </Typography>
         <Typography
           variant="body1"
@@ -58,10 +61,7 @@ const BannerPhoto = () => {
             maxWidth: "800px",
           }}
         >
-          BootMart is your trusted online platform for ordering delicious meals
-          from a variety of vendors. Whether it’s a quick snack, a full meal, or
-          a late-night craving, we’ve got you covered with fast delivery,
-          affordable prices, and a user-friendly experience.
+          {t("BANNER_PHOTO_DESC")}
         </Typography>
       </Box>
     </Box>

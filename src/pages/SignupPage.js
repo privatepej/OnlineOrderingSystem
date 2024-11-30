@@ -14,6 +14,7 @@ import {
   InputLabel,
   FormControl,
 } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 const SignupPage = () => {
   const [formData, setFormData] = useState({
@@ -28,6 +29,7 @@ const SignupPage = () => {
   const [success, setSuccess] = useState("");
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { t } = useTranslation("signup");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -87,9 +89,8 @@ const SignupPage = () => {
           variant="h4"
           sx={{ fontWeight: "bold", color: "#5d9488", marginBottom: "20px" }}
         >
-          {user?.role === "ADMINISTRATOR" ? "Add User" : "Signup"}
+          {user?.role === "ADMINISTRATOR" ? t("TITLE_ADD") : t("TITLE_SIGNUP")}
         </Typography>
-
         {error && (
           <Alert severity="error" sx={{ marginBottom: "20px" }}>
             {error}
@@ -100,7 +101,6 @@ const SignupPage = () => {
             {success}
           </Alert>
         )}
-
         <Box component="form" onSubmit={handleSubmit}>
           <TextField
             label="Username"
@@ -157,7 +157,7 @@ const SignupPage = () => {
 
           {user?.role === "ADMINISTRATOR" && (
             <FormControl fullWidth sx={{ marginBottom: "20px" }}>
-              <InputLabel>Role</InputLabel>
+              <InputLabel>{t("ROLE")}</InputLabel>
               <Select
                 label="role"
                 name="role"
@@ -165,9 +165,9 @@ const SignupPage = () => {
                 onChange={handleChange}
                 required
               >
-                <MenuItem value="CUSTOMER">Customer</MenuItem>
-                <MenuItem value="STAFF">Staff</MenuItem>
-                <MenuItem value="ADMINISTRATOR">Administrator</MenuItem>
+                <MenuItem value="CUSTOMER">{t("CUSTOMER")}</MenuItem>
+                <MenuItem value="STAFF">{t("STAFF")}</MenuItem>
+                <MenuItem value="ADMINISTRATOR">{t("ADMINISTRATOR")}</MenuItem>
               </Select>
             </FormControl>
           )}
@@ -188,7 +188,7 @@ const SignupPage = () => {
               padding: "10px 0",
             }}
           >
-            Register
+            {t("REGISTER")}
           </Button>
         </Box>
       </Box>

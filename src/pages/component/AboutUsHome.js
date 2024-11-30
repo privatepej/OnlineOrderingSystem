@@ -2,9 +2,12 @@ import React from "react";
 import Box from "@mui/material/Box";
 import { Typography, Button } from "@mui/material";
 import { useNavigate } from "react-router";
+import { useTranslation } from "react-i18next";
 
 const AboutUsHome = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation("homePage");
+
   return (
     <Box
       sx={{
@@ -27,7 +30,7 @@ const AboutUsHome = () => {
             color: "#555",
           }}
         >
-          Our Story
+          {t("OUR_STORY")}
         </Typography>
         <Typography
           sx={{
@@ -37,7 +40,7 @@ const AboutUsHome = () => {
             marginTop: "10px",
           }}
         >
-          ABOUT US
+          {t("ABOUT_US")}
         </Typography>
         <Typography
           sx={{
@@ -46,7 +49,7 @@ const AboutUsHome = () => {
             marginTop: "20px",
           }}
         >
-          Welcome to BootMart
+          {t("ABOUT_US_MAIN_TEXT")}
         </Typography>
 
         <Typography
@@ -57,11 +60,7 @@ const AboutUsHome = () => {
             lineHeight: "1.8",
           }}
         >
-          BootMart started with a vision to simplify food ordering for
-          small-scale businesses like cafeterias, fast food outlets, and
-          take-out services. Over time, we’ve grown into a trusted platform
-          connecting hungry customers with the meals they love, delivered with
-          speed and reliability.
+          {t("ABOUT_US_DESCRIPTION_1")}
         </Typography>
         <Typography
           sx={{
@@ -71,9 +70,7 @@ const AboutUsHome = () => {
             lineHeight: "1.8",
           }}
         >
-          Our mission is to offer an easy-to-use system that benefits both
-          businesses and customers by providing a seamless food ordering
-          experience, ensuring satisfaction every step of the way.
+          {t("ABOUT_US_DESCRIPTION_2")}
         </Typography>
 
         <Button
@@ -92,7 +89,7 @@ const AboutUsHome = () => {
           }}
           onClick={() => navigate("/aboutus")}
         >
-          <Typography>DISCOVER MORE</Typography>
+          <Typography> {t("DISCOVER_MORE")}</Typography>
         </Button>
       </Box>
     </Box>

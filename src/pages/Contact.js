@@ -14,8 +14,10 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import Grid from "@mui/material/Grid2";
+import { useTranslation } from "react-i18next";
 
 const Contact = () => {
+  const { t } = useTranslation("contact");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -61,12 +63,13 @@ const Contact = () => {
           mb: 5,
         }}
       >
-        Contact Us
+        {t("CONTACT_US")}
       </Typography>
 
       <Grid container spacing={2}>
         <Grid size={{ md: 8 }}>
           <Box
+            component="form"
             onSubmit={handleSubmit}
             sx={{
               padding: "20px",
@@ -82,11 +85,11 @@ const Contact = () => {
                 color: "#5d9488",
               }}
             >
-              Send Us a Message
+              {t("SEND_US_A_MESSAGE")}
             </Typography>
 
             <TextField
-              label="Name"
+              label={t("NAME_LABEL")}
               name="name"
               value={formData.name}
               onChange={handleChange}
@@ -96,7 +99,7 @@ const Contact = () => {
             />
 
             <TextField
-              label="Email"
+              label={t("EMAIL_LABEL")}
               name="email"
               type="email"
               value={formData.email}
@@ -107,7 +110,7 @@ const Contact = () => {
             />
 
             <TextField
-              label="Message"
+              label={t("MESSAGE_LABEL")}
               name="message"
               value={formData.message}
               onChange={handleChange}
@@ -131,12 +134,11 @@ const Contact = () => {
                 },
               }}
             >
-              Send Message
+              {t("SEND_MESSAGE")}
             </Button>
           </Box>
         </Grid>
 
-        {/* Contact Details */}
         <Grid size={{ md: 4 }}>
           <Box sx={{ padding: "20px" }}>
             <Typography
@@ -147,7 +149,7 @@ const Contact = () => {
                 color: "#5d9488",
               }}
             >
-              Get in Touch
+              {t("GET_IN_TOUCH")}
             </Typography>
 
             <Box
@@ -158,9 +160,7 @@ const Contact = () => {
               }}
             >
               <LocationOnIcon sx={{ color: "#0e5026", mr: 1 }} />
-              <Typography variant="body1">
-                123 Keyland Arnaiz Bootmart City, SBC 12345
-              </Typography>
+              <Typography variant="body1">{t("ADDRESS")}</Typography>
             </Box>
 
             <Box
@@ -171,7 +171,7 @@ const Contact = () => {
               }}
             >
               <PhoneIcon sx={{ color: "#0e5026", mr: 1 }} />
-              <Typography variant="body1">+63 (123) 456-7890</Typography>
+              <Typography variant="body1">{t("PHONE")}</Typography>
             </Box>
 
             <Box
@@ -182,7 +182,7 @@ const Contact = () => {
               }}
             >
               <EmailIcon sx={{ color: "#0e5026", mr: 1 }} />
-              <Typography variant="body1">support@sbcbootmart.com</Typography>
+              <Typography variant="body1">{t("EMAIL")}</Typography>
             </Box>
 
             <Box>

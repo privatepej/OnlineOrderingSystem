@@ -10,6 +10,7 @@ import {
   Select,
   MenuItem,
 } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 const DeleteProductModal = ({
   isOpen,
@@ -19,14 +20,16 @@ const DeleteProductModal = ({
   selectedProduct,
   setSelectedProduct,
 }) => {
+  const { t } = useTranslation("deleteProductModal");
+
   return (
     <Dialog open={isOpen} onClose={onClose} maxWidth={"md"} fullWidth={true}>
-      <DialogTitle>Delete Product</DialogTitle>
+      <DialogTitle>{t("DELETE_PRODUCT")}</DialogTitle>
       <DialogContent>
         <FormControl fullWidth>
-          <InputLabel sx={{ mt: 0.8 }}>Product Name</InputLabel>
+          <InputLabel sx={{ mt: 0.8 }}>{t("PRODUCT_NAME")}</InputLabel>
           <Select
-            label="Product Name"
+            label={t("PRODUCT_NAME")}
             value={selectedProduct}
             onChange={(e) => setSelectedProduct(e.target.value)}
           >
@@ -40,10 +43,10 @@ const DeleteProductModal = ({
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} color="secondary">
-          Cancel
+          {t("CANCEL")}
         </Button>
         <Button onClick={onConfirm} color="error" disabled={!selectedProduct}>
-          Delete
+          {t("DELETE")}
         </Button>
       </DialogActions>
     </Dialog>

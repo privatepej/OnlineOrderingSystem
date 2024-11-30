@@ -1,5 +1,6 @@
 import { Button, Box } from "@mui/material";
 import { useAuth } from "../hooks/AuthProvider";
+import { useTranslation } from "react-i18next";
 
 const AdminButtons = ({
   onAddProduct,
@@ -10,6 +11,7 @@ const AdminButtons = ({
   onUpdateCategory,
 }) => {
   const { user } = useAuth();
+  const { t } = useTranslation("commons");
 
   if (user?.role !== "ADMINISTRATOR") {
     return null;
@@ -22,7 +24,7 @@ const AdminButtons = ({
         onClick={onAddProduct}
         sx={{ m: 1 }}
       >
-        Add Product
+        {t("ADD_PRODUCT")}
       </Button>
       <Button
         variant="contained"
@@ -30,7 +32,7 @@ const AdminButtons = ({
         onClick={onDeleteProduct}
         sx={{ m: 1 }}
       >
-        Delete Product
+        {t("DELETE_PRODUCT")}
       </Button>
       <Button
         variant="contained"
@@ -38,7 +40,7 @@ const AdminButtons = ({
         onClick={onUpdateProduct}
         sx={{ m: 1 }}
       >
-        Update Product
+        {t("UPDATE_PRODUCT")}
       </Button>
       <Button
         variant="contained"
@@ -46,7 +48,7 @@ const AdminButtons = ({
         onClick={onAddCategory}
         sx={{ m: 1 }}
       >
-        Add Category
+        {t("ADD_CATEGORY")}
       </Button>
       <Button
         variant="contained"
@@ -54,7 +56,7 @@ const AdminButtons = ({
         onClick={onDeleteCategory}
         sx={{ m: 1 }}
       >
-        Delete Category
+        {t("DELETE_CATEGORY")}
       </Button>
       <Button
         variant="contained"
@@ -62,7 +64,7 @@ const AdminButtons = ({
         onClick={onUpdateCategory}
         sx={{ m: 1 }}
       >
-        Update Category
+        {t("UPDATE_CATEGORY")}
       </Button>
     </Box>
   );

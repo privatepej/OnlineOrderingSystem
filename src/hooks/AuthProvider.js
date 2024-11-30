@@ -4,7 +4,6 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
-    // Load user from sessionStorage on initial load
     const storedUser = sessionStorage.getItem("user");
     return storedUser ? JSON.parse(storedUser) : null;
   });
@@ -22,7 +21,6 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const handleStorageChange = () => {
       const storedUser = sessionStorage.getItem("user");
-      console.log("storedUser", storedUser);
       setUser(storedUser ? JSON.parse(storedUser) : null);
     };
     window.addEventListener("storage", handleStorageChange);

@@ -10,10 +10,12 @@ import {
 } from "@mui/material";
 import { useCart } from "../../hooks/CartContext";
 import { useAuth } from "../../hooks/AuthProvider";
+import { useTranslation } from "react-i18next";
 
 const ProductCard = ({ product }) => {
   const { addToCart } = useCart();
   const { user } = useAuth();
+  const { t } = useTranslation("productCard");
 
   const handleAddToCart = () => {
     addToCart(product.id, 1);
@@ -82,14 +84,14 @@ const ProductCard = ({ product }) => {
               variant="body2"
               sx={{ color: "text.secondary", fontStyle: "italic" }}
             >
-              No description available
+              {t("NO_DESCRIPTION_AVAIL")}
             </Typography>
           )}
           <Typography
             variant="body2"
             sx={{ color: "text.secondary", fontStyle: "italic" }}
           >
-            Category: {product.categoryname}
+            {t("CATEGORY")} {product.categoryname}
           </Typography>
         </Box>
         <Typography
@@ -100,7 +102,8 @@ const ProductCard = ({ product }) => {
             mb: 1,
           }}
         >
-          Price: ${product.price.toFixed(2)}
+          {t("PRICE")} {t("commons:CURRENCY")}
+          {product.price.toFixed(2)}
         </Typography>
         {user?.role === "CUSTOMER" && (
           <Button
@@ -115,7 +118,7 @@ const ProductCard = ({ product }) => {
               },
             }}
           >
-            Add to Cart
+            {t("ADD_TO_CART")}
           </Button>
         )}
       </CardContent>

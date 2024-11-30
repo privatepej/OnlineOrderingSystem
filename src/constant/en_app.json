@@ -1,0 +1,185 @@
+{
+    "en": {
+      "commons": {
+        "WELCOME": "Welcome to BootMart!",
+        "ADD_TO_CART": "Add to Cart",
+        "PRICE": "Price",
+        "CATEGORY": "Category",
+        "EMPTY_CART": "Your cart is empty.", 
+        "LOADING": "Loading...",
+        "ADD_PRODUCT": "Add Product",
+        "DELETE_PRODUCT": "Delete Product",
+        "UPDATE_PRODUCT": "Update Product",
+        "ADD_CATEGORY": "Add Category",
+        "DELETE_CATEGORY": "Delete Category",
+        "UPDATE_CATEGORY": "Update Category",
+        "CURRENCY": "₱"
+      },
+      "homePage": {
+        "LANDING_PAGE_MAIN_TEXT": "Delicious Food, Fast and Easy",
+        "LANDING_PAGE_SUB_TEXT": "SBC BootMart - Your Online Food Partner",
+        "WIDE_MENU": "Wide Menu",
+        "WIDE_MENU_DESC": "Explore a variety of options to satisfy your cravings.",
+        "FREE_DELIVERY": "Free Delivery",
+        "FREE_DELIVERY_DESC": "Enjoy free shipping on orders above 500, straight to your door.",
+        "TOP_QUALITY": "Top Quality",
+        "TOP_QUALITY_DESC": "Only the best for you—top-quality products at unbeatable prices.",
+        "ABOUT_US": "About Us",
+        "OUR_STORY": "Our Story",
+        "ABOUT_US_MAIN_TEXT": "Welcome to BootMart",
+        "ABOUT_US_DESCRIPTION_1": "BootMart started with a vision to simplify food ordering for small-scale businesses like cafeterias, fast food outlets, and take-out services. Over time, we’ve grown into a trusted platform connecting hungry customers with the meals they love, delivered with speed and reliability.",
+        "ABOUT_US_DESCRIPTION_2": "Our mission is to offer an easy-to-use system that benefits both businesses and customers by providing a seamless food ordering experience, ensuring satisfaction every step of the way.",
+        "DISCOVER_MORE": "Discover More",
+        "BANNER_PHOTO_TITLE": "Welcome to",
+        "BANNER_PHOTO_SUBTITLE": "BootMart",
+        "BANNER_PHOTO_DESC": "BootMart is your trusted online platform for ordering delicious meals from a variety of vendors. Whether it’s a quick snack, a full meal, or a late-night craving, we’ve got you covered with fast delivery, affordable prices, and a user-friendly experience.",
+        "SHOP_FOR_TITLE": "Shop For",
+        "SHOP_FOR_PRODUCTS": "Products",
+        "SHOP_FOR_DESC": "Discover a variety of options to satisfy your cravings. Explore our categories below!",
+        "FAST_FOOD": "Fast Food",
+        "PIZZA": "Pizza",
+        "DESSERTS": "Desserts",
+        "BEVERAGES": "Beverages",
+        "VIEW_ALL_PRODUCTS": "View All Products",
+        "WHY_SHOP_TITLE": "Why Shop With Us?",
+        "WHY_SHOP_CONVENIENCE": "✅ Convenience at Your Fingertips: Order your favorite meals anytime, anywhere.",
+        "WHY_SHOP_AFFORDABLE": "✅ Affordable Prices: Enjoy great deals and discounts on delicious meals.",
+        "WHY_SHOP_FAST": "✅ Fast Delivery: Get your meals delivered hot and fresh in 30 minutes or less.",
+        "WHY_SHOP_VARIETY": "✅ Variety of Choices: Choose from a wide range of cuisines and dishes.",
+        "WHY_SHOP_SECURE": "✅ Safe Transactions: Your data and payments are secure with us.",
+        "ADDRESS": "Address",
+        "ADDRESS_LINE_1": "123 Keyland Arnaiz",
+        "ADDRESS_LINE_2": "BootMart City, SBC 12345",
+        "STORE_INFO": "Store Information",
+        "ABOUT_US_LINK": "About Us",
+        "PHONE": "Phone: +63 (123) 456-7890",
+        "EMAIL": "Email: support@sbcbootmart.com",
+        "POLICY": "Policy",
+        "REFUND_POLICY": "Refund Policy",
+        "TERMS_OF_USE": "Terms of Use",
+        "PRIVACY_POLICY": "Privacy Policy",
+        "JOIN_NEWSLETTER_TITLE": "Join Our Newsletter",
+        "JOIN_NEWSLETTER_DESC": "Get the latest updates and offers.",
+        "SUBSCRIBE": "Subscribe",
+        "FOLLOW_US": "Follow us:",
+        "COPYRIGHT": "COPYRIGHT © 2024, SBC BOOTMART. ALL RIGHTS RESERVED."
+      },
+      "aboutUs": {
+        "ABOUT_US": "About Us",
+        "HISTORY": "History",
+        "HISTORY_DESCRIPTION": "BootMart began with a simple mission: to make food ordering quick, easy, and accessible for everyone. From humble beginnings serving college cafeterias and small take-out restaurants, we’ve grown into a trusted partner for food delivery, offering a seamless platform for businesses and customers alike.",
+        "OUR_SHOP": "Our Shop",
+        "OUR_SHOP_DESCRIPTION": "At BootMart, we believe in the power of connection. We partner with a wide range of vendors to bring customers the meals they love, delivered with speed and reliability. Our shop is dedicated to enhancing the online food ordering experience by prioritizing customer satisfaction, secure payments, and timely deliveries."
+      },
+      "contact": {
+        "CONTACT_US": "Contact Us",
+        "SEND_US_A_MESSAGE": "Send Us a Message",
+        "NAME_LABEL": "Name",
+        "EMAIL_LABEL": "Email",
+        "MESSAGE_LABEL": "Message",
+        "SEND_MESSAGE": "Send Message",
+        "GET_IN_TOUCH": "Get in Touch",
+        "ADDRESS": "123 Keyland Arnaiz Bootmart City, SBC 12345",
+        "PHONE": "+63 (123) 456-7890",
+        "EMAIL": "support@sbcbootmart.com"
+      },
+      "cart": {
+        "YOUR_CART": "Your Cart",
+        "CART_TOTAL": "Cart Total",
+        "PRICE": "Price",
+        "TOTAL": "Total",
+        "CLEAR_CART": "Clear Cart",
+        "EMPTY_CART": "Your cart is empty."
+      },
+      "login": {
+        "LOG_IN": "Log in",
+        "SIGN_IN": "Sign In",
+        "DONT_HAVE_ACCOUNT": "Don't have an account?",
+        "SIGN_UP": "Sign Up"
+      },
+      "signup": {
+        "ROLE": "Role",
+        "TITLE_ADD": "Add User",
+        "TITLE_SIGNUP": "Signup",
+        "REGISTER": "Register",
+        "CUSTOMER": "Customer",
+        "STAFF": "Staff",
+        "ADMINISTRATOR": "Administrator"
+      },
+      "errorPage": {
+        "404": "404",
+        "OPS_404": "Oops! This page seems to have wandered off.",
+        "404_GO_BACK": "Go Back to Home"
+      },
+      "product":  {
+        "PRODUCT_CATALOG": "Product Catalog",
+        "NO_PRODUCT_MATCH" : "No products match.",
+        "UNCATEGORIZED": "Uncategorized"
+      },
+      "updateProductModal": {
+        "UPDATE_PRODUCT": "Update Product",
+        "ALERT_PRODUCT_MODAL": "Please fill up the field that you want to update.",
+        "SELECT_PRODUCT": "Select Product",
+        "PRODUCT_NAME": "Product Name",
+        "PRICE": "Price",
+        "DESCRIPTION": "Description",
+        "CATEGORY": "Category",
+        "SELECTED_IMAGE": "Selected image for update:",
+        "CURRENTLY_IMAGE": "Currently displayed image:",
+        "CANCEL": "Cancel",
+        "SAVE": "Save"
+      },
+      "addProductModal": {
+        "ADD_PRODUCT": "Add Product",
+        "PRODUCT_NAME": "Product Name",
+        "PRICE": "Price",
+        "DESCRIPTION": "Description",
+        "CATEGORY": "Category",
+        "SELECTED_IMAGE": "Selected image:",
+        "CANCEL": "Cancel",
+        "ADD": "Add"
+      },
+      "productFilter": {
+        "SORT_CATEGORY": "Sort by Category",
+        "ALL_CATEGORIES": "All Categories",
+        "SEARCH_PRODUCT": "Search Products"
+      },
+      "productCard": {
+        "NO_DESCRIPTION_AVAIL": "No description available",
+        "CATEGORY": "Category:",
+        "PRICE": "Price:",
+        "ADD_TO_CART": "Add to Cart"
+      },
+      "updateCategoryModal": {
+        "UPDATE_CATEGORY": "Update Category",
+        "SELECT_TO_UPDATE": "Select a category and update its name.",
+        "SELECT_CATEGORY": "Select Category",
+        "NEW_CATEGORY_NAME": "New Category Name",
+        "CANCEL": "Cancel",
+        "SAVE": "Save"
+      },
+      "deleteCategoryModal": {
+        "DELETE_CATEGORY": "Delete Category",
+        "WARNING_DELETE_CATEGORY": "Warning: Deleting a category will remove it permanently!",
+        "SELECT_CATEGORY": "Select Category",
+        "CANCEL": "Cancel",
+        "DELETE": "Delete"
+      },
+      "deleteProductModal": {
+        "DELETE_PRODUCT": "Delete Product",
+        "PRODUCT_NAME": "Product Name",
+        "CANCEL": "Cancel",
+        "DELETE": "Delete"
+      },
+      "addCategoryModal": {
+        "ADD_CATEGORY": "Add Category",
+        "CATEGORY_NAME": "Category Name",
+        "CANCEL": "Cancel",
+        "ADD": "Add",
+        "ERROR_CATEGORY_NAME_REQUIRE": "Category name is required."
+      }
+
+
+    }
+  }
+  
