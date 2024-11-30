@@ -22,32 +22,47 @@ const ProductCard = ({ product }) => {
   return (
     <Card
       sx={{
-        height: 360,
         display: "flex",
         flexDirection: "column",
+        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.3)",
       }}
     >
-      <CardHeader title={product.pname} sx={{ pt: 0.5, pb: 0.5 }} />
-      <CardMedia
-        component="img"
-        height="200"
-        image={`http://localhost:8080/onlineshop/product/images/${product.imagename}`}
-        onError={(e) => {
-          e.target.onerror = null;
-          e.target.src = "/img/png/defaultReact.png";
+      <CardHeader
+        title={product.pname}
+        titleTypographyProps={{
+          variant: "h6",
+          sx: {
+            fontWeight: "bold",
+            textAlign: "center",
+            textOverflow: "ellipsis",
+          },
         }}
-        alt={product.pname}
+        sx={{ p: 1, backgroundColor: "#f4f4f4" }}
       />
 
-      <CardContent
+      <Box
         sx={{
-          flexGrow: 1,
           display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
+          height: "200px",
+          backgroundColor: "#f9f9f9",
         }}
       >
-        <Box>
+        <CardMedia
+          component="img"
+          image={`http://localhost:8080/onlineshop/product/images/${product.imagename}`}
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = "/img/png/defaultReact.png";
+          }}
+          alt={product.pname}
+          sx={{
+            objectFit: "contain",
+          }}
+        />
+      </Box>
+
+      <CardContent>
+        <Box sx={{ mb: 2 }}>
           {product.description ? (
             <Typography
               variant="body2"
@@ -77,9 +92,29 @@ const ProductCard = ({ product }) => {
             Category: {product.categoryname}
           </Typography>
         </Box>
-        <Typography variant="h6">Price: ${product.price}</Typography>
+        <Typography
+          variant="h6"
+          sx={{
+            textAlign: "center",
+            fontWeight: "bold",
+            mb: 1,
+          }}
+        >
+          Price: ${product.price.toFixed(2)}
+        </Typography>
         {user?.role === "CUSTOMER" && (
-          <Button variant="contained" color="primary" onClick={handleAddToCart}>
+          <Button
+            variant="contained"
+            color="primary"
+            fullWidth
+            onClick={handleAddToCart}
+            sx={{
+              backgroundColor: "#5d9488",
+              "&:hover": {
+                backgroundColor: "#0e5026",
+              },
+            }}
+          >
             Add to Cart
           </Button>
         )}
