@@ -11,12 +11,7 @@ const ErrorPage = () => {
       <Typography variant="h5" gutterBottom>
         Oops! This page seems to have wandered off.
       </Typography>
-      <Button
-        variant="contained"
-        color="primary"
-        component={Link}
-        to="/home"
-      >
+      <Button variant="contained" color="primary" component={Link} to="/">
         Go Back to Home
       </Button>
     </Container>

@@ -8,11 +8,22 @@ import { Box } from "@mui/material";
 
 const Navbar = () => {
   return (
-    <AppBar position="sticky">
-      <Container maxWidth="xl">
+    <AppBar
+      position="sticky"
+      sx={{
+        background: "#ffd475",
+        color: "#5d9488",
+      }}
+    >
+      <Container>
         <Toolbar disableGutters>
+          {/* Left Section */}
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          </Box>
+
+          {/* Right Section */}
+          <Box sx={{ display: "flex", alignItems: "center", ml: "auto" }}>
             <AppLinks />
           </Box>
         </Toolbar>

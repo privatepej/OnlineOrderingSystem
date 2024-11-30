@@ -20,7 +20,7 @@ import Loading from "../component/Loading";
 const Products = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
-  const { alertMessage, showAlert } = useAlert();
+  const { alertMessage, alertSeverity, showAlert } = useAlert();
   const {
     addModal,
     deleteModal,
@@ -129,7 +129,7 @@ const Products = () => {
       </Box>
       <CustomAlert
         message={alertMessage}
-        severity="success"
+        severity={alertSeverity}
         sx={{ mb: 2 }}
         onClose={() => showAlert("")}
       />

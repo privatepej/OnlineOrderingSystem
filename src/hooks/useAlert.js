@@ -1,14 +1,18 @@
 import { useState } from "react";
 
 const useAlert = () => {
-  const [alertMessage, setAlertMessage] = useState("");
+  const [alert, setAlert] = useState({ message: "", severity: "info" });
 
-  const showAlert = (message) => {
-    setAlertMessage(message);
-    setTimeout(() => setAlertMessage(""), 3000);
+  const showAlert = (message, severity = "info") => {
+    setAlert({ message, severity });
+    setTimeout(() => setAlert({ message: "", severity: "info" }), 3000);
   };
 
-  return { alertMessage, showAlert };
+  return {
+    alertMessage: alert.message,
+    alertSeverity: alert.severity,
+    showAlert,
+  };
 };
 
 export default useAlert;

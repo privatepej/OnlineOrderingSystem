@@ -76,7 +76,7 @@ const useProductAndCategoryActions = ({ showAlert }) => {
       const savedProduct = await Api.addProduct(formData);
       setProducts((prev) => [...prev, savedProduct]);
       handleCloseModal();
-      showAlert("Product added successfully!");
+      showAlert("Product added successfully!", "success");
     } catch (err) {
       console.error("Error adding product:", err);
     }
@@ -91,7 +91,10 @@ const useProductAndCategoryActions = ({ showAlert }) => {
       setProducts((prev) =>
         prev.filter((product) => product.pname !== selectedProduct)
       );
-      showAlert(`Product "${selectedProduct}" deleted successfully!`);
+      showAlert(
+        `Product "${selectedProduct}" deleted successfully!`,
+        "success"
+      );
       handleCloseDeleteModal();
     } catch (err) {
       console.error("Failed to delete product:", err);
@@ -121,7 +124,7 @@ const useProductAndCategoryActions = ({ showAlert }) => {
           return p;
         })
       );
-      showAlert("Product updated successfully!");
+      showAlert("Product updated successfully!", "success");
       handleCloseUpdateModal();
     } catch (err) {
       console.error("Error updating product:", err);
@@ -137,11 +140,11 @@ const useProductAndCategoryActions = ({ showAlert }) => {
     try {
       await Api.addCategory(newCategory);
       setCategories((prev) => [...prev, newCategory]);
-      showAlert("Category added successfully!");
+      showAlert("Category added successfully!", "success");
       handleCloseModal();
     } catch (err) {
       console.error("Failed to add category:", err);
-      showAlert("Failed to add category. Please try again.");
+      showAlert("Failed to add category. Please try again.", "error");
     }
   };
 
@@ -162,11 +165,11 @@ const useProductAndCategoryActions = ({ showAlert }) => {
             : product
         )
       );
-      showAlert(`Category "${categoryName}" deleted successfully!`);
+      showAlert(`Category "${categoryName}" deleted successfully!`, "success");
       handleCloseModal();
     } catch (err) {
       console.error("Failed to delete category:", err);
-      showAlert("Failed to delete category. Please try again.");
+      showAlert("Failed to delete category. Please try again.", "error");
     }
   };
 
@@ -188,11 +191,11 @@ const useProductAndCategoryActions = ({ showAlert }) => {
             : product
         )
       );
-      showAlert("Category updated successfully!");
+      showAlert("Category updated successfully!", "success");
       handleCloseModal();
     } catch (err) {
       console.error("Failed to update category:", err);
-      showAlert("Failed to update category. Please try again.");
+      showAlert("Failed to update category. Please try again.", "error");
     }
   };
 

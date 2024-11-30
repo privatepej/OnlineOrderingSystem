@@ -52,7 +52,7 @@ const AppLinks = () => {
     <>
       {links.map(({ path, label }) => (
         <Link key={path} to={path} style={{ textDecoration: "none" }}>
-          <Button sx={{ my: 2, color: "white", display: "block" }}>
+          <Button sx={{ my: 2, color: "#0e5026", display: "block" }}>
             {label}
           </Button>
         </Link>
@@ -60,7 +60,7 @@ const AppLinks = () => {
 
       {user ? (
         <Button
-          sx={{ my: 2, color: "white", display: "block" }}
+          sx={{ my: 2, color: "#0e5026", display: "block" }}
           onClick={handleLogout}
         >
           Logout
@@ -68,12 +68,12 @@ const AppLinks = () => {
       ) : (
         <>
           <Link to="/login" style={{ textDecoration: "none" }}>
-            <Button sx={{ my: 2, color: "white", display: "block" }}>
+            <Button sx={{ my: 2, color: "#0e5026", display: "block" }}>
               Log In
             </Button>
           </Link>
           <Link to="/signup" style={{ textDecoration: "none" }}>
-            <Button sx={{ my: 2, color: "white", display: "block" }}>
+            <Button sx={{ my: 2, color: "#0e5026", display: "block" }}>
               Sign Up
             </Button>
           </Link>
