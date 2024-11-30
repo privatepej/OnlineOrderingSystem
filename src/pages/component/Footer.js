@@ -66,7 +66,7 @@ const Footer = () => {
           >
             About Us
           </Typography>
-          <Typography variant="body1">Phone: +1 (123) 456-7890</Typography>
+          <Typography variant="body1">Phone: +63 (123) 456-7890</Typography>
           <Typography variant="body1">
             Email: support@sbcbootmart.com
           </Typography>
@@ -143,8 +143,6 @@ const Footer = () => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          gap: "20px",
-          marginTop: "20px",
         }}
       >
         <Typography variant="body1">Follow us:</Typography>
