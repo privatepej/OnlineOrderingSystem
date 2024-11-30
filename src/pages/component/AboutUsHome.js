@@ -1,6 +1,6 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import { Typography, Button, Link } from "@mui/material";
+import { Typography, Button } from "@mui/material";
 import { useNavigate } from "react-router";
 
 const AboutUsHome = () => {

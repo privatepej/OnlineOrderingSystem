@@ -1,6 +1,6 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import { Typography, Link, Button } from "@mui/material";
+import { Typography, Button } from "@mui/material";
 import FastfoodIcon from "@mui/icons-material/Fastfood";
 import LocalPizzaIcon from "@mui/icons-material/LocalPizza";
 import IcecreamIcon from "@mui/icons-material/Icecream";
