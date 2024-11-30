@@ -95,7 +95,7 @@ const AboutUs = () => {
             {t("OUR_SHOP_DESCRIPTION")}
           </Typography>
           <img
-            src="./img/png/pizza-store2.jpg"
+            src="./img/png/banner6.png"
             alt={t("OUR_COMPANY")}
             width="500px"
             height="300px"

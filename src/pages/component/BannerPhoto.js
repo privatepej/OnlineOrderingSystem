@@ -10,8 +10,7 @@ const BannerPhoto = () => {
     <Box
       sx={{
         minHeight: "70vh",
-        backgroundImage:
-          "url('./img/png/patrick-fore-m9qWesqRN0M-unsplash.jpg')",
+        backgroundImage: "url('./img/png/banner7.png')",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         backgroundAttachment: "fixed",

@@ -21,7 +21,14 @@ const DeleteProductModal = ({
   setSelectedProduct,
 }) => {
   const { t } = useTranslation("deleteProductModal");
-
+  const menuProps = {
+    PaperProps: {
+      style: {
+        maxHeight: 250,
+        overflowY: "auto",
+      },
+    },
+  };
   return (
     <Dialog open={isOpen} onClose={onClose} maxWidth={"md"} fullWidth={true}>
       <DialogTitle>{t("DELETE_PRODUCT")}</DialogTitle>
@@ -32,6 +39,7 @@ const DeleteProductModal = ({
             label={t("PRODUCT_NAME")}
             value={selectedProduct}
             onChange={(e) => setSelectedProduct(e.target.value)}
+            MenuProps={menuProps}
           >
             {products.map((product) => (
               <MenuItem key={product.pname} value={product.pname}>

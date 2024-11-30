@@ -52,6 +52,15 @@ const UpdateCategoryModal = ({ isOpen, onClose, categories, onUpdate }) => {
     setSelectedCategory(e.target.value);
   };
 
+  const menuProps = {
+    PaperProps: {
+      style: {
+        maxHeight: 250,
+        overflowY: "auto",
+      },
+    },
+  };
+
   return (
     <Dialog open={isOpen} onClose={handleClose}>
       <DialogTitle>{t("UPDATE_CATEGORY")}</DialogTitle>
@@ -66,6 +75,7 @@ const UpdateCategoryModal = ({ isOpen, onClose, categories, onUpdate }) => {
             label={t("SELECT_CATEGORY")}
             value={selectedCategory}
             onChange={handleCategoryChange}
+            MenuProps={menuProps}
           >
             {categories.map((category, index) => (
               <MenuItem key={index} value={category.id}>

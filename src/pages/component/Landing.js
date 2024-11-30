@@ -9,7 +9,7 @@ const Landing = () => {
     <Box
       sx={{
         minHeight: "100vh",
-        backgroundImage: "url('./img/png/Pic2-nik-owens-unsplash.jpg')",
+        backgroundImage: "url('./img/png/banner8.png')",
         opacity: 0.9,
         backgroundRepeat: "no-repeat",
         backgroundAttachment: "fixed",

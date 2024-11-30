@@ -10,8 +10,7 @@ const WhyShopWithUs = () => {
     <Box
       sx={{
         minHeight: "50vh",
-        backgroundImage:
-          "url('./img/png/stefan-barkman-ysambitxV8M-unsplash.jpg')",
+        backgroundImage: "url('./img/png/banner5.png')",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         backgroundAttachment: "fixed",

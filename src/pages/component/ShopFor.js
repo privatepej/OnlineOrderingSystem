@@ -1,10 +1,6 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import { Typography, Button } from "@mui/material";
-import FastfoodIcon from "@mui/icons-material/Fastfood";
-import LocalPizzaIcon from "@mui/icons-material/LocalPizza";
-import IcecreamIcon from "@mui/icons-material/Icecream";
-import LiquorIcon from "@mui/icons-material/Liquor";
 import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 
@@ -58,7 +54,14 @@ const ShopFor = () => {
             width: "250px",
           }}
         >
-          <FastfoodIcon sx={{ fontSize: "150px", color: "#FF7043" }} />
+          <Box
+            component="img"
+            src="/img/png/fastfood.png"
+            alt="SBC Bootshop Logo"
+            sx={{
+              height: 200,
+            }}
+          />
           <Typography variant="h5" sx={{ fontWeight: "bold", mt: 2 }}>
             {t("FAST_FOOD")}
           </Typography>
@@ -73,9 +76,16 @@ const ShopFor = () => {
             width: "250px",
           }}
         >
-          <LocalPizzaIcon sx={{ fontSize: "150px", color: "#F57C00" }} />
+          <Box
+            component="img"
+            src="/img/png/chips.png"
+            alt="SBC Bootshop Logo"
+            sx={{
+              height: 200,
+            }}
+          />
           <Typography variant="h5" sx={{ fontWeight: "bold", mt: 2 }}>
-            {t("PIZZA")}
+            {t("CHIPS")}
           </Typography>
         </Box>
 
@@ -88,7 +98,14 @@ const ShopFor = () => {
             width: "250px",
           }}
         >
-          <IcecreamIcon sx={{ fontSize: "150px", color: "#4FC3F7" }} />
+          <Box
+            component="img"
+            src="/img/png/ice-cream.png"
+            alt="SBC Bootshop Logo"
+            sx={{
+              height: 200,
+            }}
+          />
           <Typography variant="h5" sx={{ fontWeight: "bold", mt: 2 }}>
             {t("DESSERTS")}
           </Typography>
@@ -103,7 +120,14 @@ const ShopFor = () => {
             width: "250px",
           }}
         >
-          <LiquorIcon sx={{ fontSize: "150px", color: "#7E57C2" }} />
+          <Box
+            component="img"
+            src="/img/png/beverage.png"
+            alt="SBC Bootshop Logo"
+            sx={{
+              height: 200,
+            }}
+          />{" "}
           <Typography variant="h5" sx={{ fontWeight: "bold", mt: 2 }}>
             {t("BEVERAGES")}
           </Typography>

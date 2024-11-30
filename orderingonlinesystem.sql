@@ -173,3 +173,12 @@ ALTER COLUMN categoryname SET DEFAULT 'Uncategorized';
 
 
 ALTER TABLE user_orders ADD COLUMN status VARCHAR(10) DEFAULT 'CART';
+
+ALTER TABLE sales
+DROP CONSTRAINT sales_itemno_fkey
+
+ALTER TABLE sales
+ADD CONSTRAINT sales_itemno_fkey
+FOREIGN KEY (itemno)
+REFERENCES product(id)
+ON DELETE CASCADE;

@@ -42,6 +42,15 @@ const ProductModal = ({
     }
   }, [product.image]);
 
+  const menuProps = {
+    PaperProps: {
+      style: {
+        maxHeight: 200,
+        overflowY: "auto",
+      },
+    },
+  };
+
   return (
     <Dialog open={isOpen} onClose={onClose}>
       <DialogTitle>{t("ADD_PRODUCT")}</DialogTitle>
@@ -88,6 +97,7 @@ const ProductModal = ({
             name="categoryname"
             value={product.categoryname}
             onChange={handleChange}
+            MenuProps={menuProps}
             required
           >
             {categories.map((category, index) => (

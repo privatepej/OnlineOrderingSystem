@@ -17,6 +17,15 @@ const ProductFilter = ({
 }) => {
   const { t } = useTranslation("productFilter");
 
+  const menuProps = {
+    PaperProps: {
+      style: {
+        maxHeight: 200,
+        overflowY: "auto",
+      },
+    },
+  };
+
   return (
     <Box sx={{ display: "flex", justifyContent: "start", mb: 3, flex: 1 }}>
       <FormControl sx={{ flex: 0.94 }}>
@@ -25,6 +34,7 @@ const ProductFilter = ({
           label={t("SORT_CATEGORY")}
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
+          MenuProps={menuProps}
         >
           <MenuItem value="">{t("ALL_CATEGORIES")}</MenuItem>
           {categories.map((category, index) => (

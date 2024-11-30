@@ -135,6 +135,15 @@ const UpdateProductModal = ({
     onClose();
   };
 
+  const menuProps = {
+    PaperProps: {
+      style: {
+        maxHeight: 200,
+        overflowY: "auto",
+      },
+    },
+  };
+
   return (
     <Dialog open={isOpen} onClose={handleClose}>
       <DialogTitle>{t("UPDATE_PRODUCT")}</DialogTitle>
@@ -149,6 +158,7 @@ const UpdateProductModal = ({
             label={t("SELECT_PRODUCT")}
             value={selectedProduct}
             onChange={(e) => setSelectedProduct(e.target.value)}
+            MenuProps={menuProps}
           >
             {products.map((product, index) => (
               <MenuItem key={index} value={product.pname}>
@@ -194,6 +204,7 @@ const UpdateProductModal = ({
             name="categoryname"
             value={updatedProduct.categoryname}
             onChange={handleFieldChange}
+            MenuProps={menuProps}
           >
             {categories.map((category, index) => (
               <MenuItem key={index} value={category.cname}>

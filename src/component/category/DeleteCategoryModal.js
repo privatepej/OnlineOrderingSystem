@@ -24,6 +24,15 @@ const DeleteCategoryModal = ({ isOpen, onClose, categories, onUpdate }) => {
     }
   };
 
+  const menuProps = {
+    PaperProps: {
+      style: {
+        maxHeight: 250,
+        overflowY: "auto",
+      },
+    },
+  };
+
   return (
     <Dialog open={isOpen} onClose={onClose}>
       <DialogTitle>{t("DELETE_CATEGORY")}</DialogTitle>
@@ -37,6 +46,7 @@ const DeleteCategoryModal = ({ isOpen, onClose, categories, onUpdate }) => {
             label={t("SELECT_CATEGORY")}
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
+            MenuProps={menuProps}
           >
             {categories.map((category, index) => (
               <MenuItem key={index} value={category.cname}>
