@@ -37,11 +37,14 @@ const ProductFilter = ({
           MenuProps={menuProps}
         >
           <MenuItem value="">{t("ALL_CATEGORIES")}</MenuItem>
-          {categories.map((category, index) => (
-            <MenuItem key={index} value={category.cname}>
-              {category.cname}
-            </MenuItem>
-          ))}
+          {categories
+            .slice()
+            .reverse()
+            .map((category, index) => (
+              <MenuItem key={index} value={category.cname}>
+                {category.cname}
+              </MenuItem>
+            ))}
         </Select>
       </FormControl>
 

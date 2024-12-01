@@ -76,8 +76,9 @@ const CartPage = () => {
                       }
                       secondary={
                         <Typography variant="body2" color="textSecondary">
-                          {t("PRICE")}: ₱{item.price.toFixed(2)} | {t("TOTAL")}:
-                          ₱{item.totalPrice.toFixed(2)}
+                          {t("PRICE")}: {t("commons:CURRENCY")}
+                          {item.price.toFixed(2)} | {t("TOTAL")}: ₱
+                          {item.totalPrice.toFixed(2)}
                         </Typography>
                       }
                     />
@@ -104,7 +105,8 @@ const CartPage = () => {
               variant="h6"
               sx={{ mt: 3, fontWeight: "bold", color: "#0e5026" }}
             >
-              {t("CART_TOTAL")}: ₱{cart.cartTotal.toFixed(2)}
+              {t("CART_TOTAL")}: {t("commons:CURRENCY")}
+              {cart.cartTotal.toFixed(2)}
             </Typography>
 
             <Box

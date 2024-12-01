@@ -48,11 +48,14 @@ const DeleteCategoryModal = ({ isOpen, onClose, categories, onUpdate }) => {
             onChange={(e) => setSelectedCategory(e.target.value)}
             MenuProps={menuProps}
           >
-            {categories.map((category, index) => (
-              <MenuItem key={index} value={category.cname}>
-                {category.cname}
-              </MenuItem>
-            ))}
+            {categories
+              .slice()
+              .reverse()
+              .map((category, index) => (
+                <MenuItem key={index} value={category.cname}>
+                  {category.cname}
+                </MenuItem>
+              ))}
           </Select>
         </FormControl>
       </DialogContent>

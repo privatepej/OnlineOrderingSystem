@@ -63,7 +63,11 @@ const ProductCard = ({ product }) => {
         />
       </Box>
 
-      <CardContent>
+      <CardContent
+        sx={{
+          height: user?.role === "CUSTOMER" ? "150px" : "auto",
+        }}
+      >
         <Box sx={{ mb: 2 }}>
           {product.description ? (
             <Typography
@@ -75,6 +79,7 @@ const ProductCard = ({ product }) => {
                 display: "-webkit-box",
                 WebkitBoxOrient: "vertical",
                 WebkitLineClamp: 2,
+                height: "45px",
               }}
             >
               {product.description}
@@ -82,7 +87,11 @@ const ProductCard = ({ product }) => {
           ) : (
             <Typography
               variant="body2"
-              sx={{ color: "text.secondary", fontStyle: "italic" }}
+              sx={{
+                color: "text.secondary",
+                fontStyle: "italic",
+                height: "45px",
+              }}
             >
               {t("NO_DESCRIPTION_AVAIL")}
             </Typography>

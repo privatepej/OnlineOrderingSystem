@@ -41,11 +41,14 @@ const DeleteProductModal = ({
             onChange={(e) => setSelectedProduct(e.target.value)}
             MenuProps={menuProps}
           >
-            {products.map((product) => (
-              <MenuItem key={product.pname} value={product.pname}>
-                {product.pname}
-              </MenuItem>
-            ))}
+            {products
+              .slice()
+              .reverse()
+              .map((product) => (
+                <MenuItem key={product.pname} value={product.pname}>
+                  {product.pname}
+                </MenuItem>
+              ))}
           </Select>
         </FormControl>
       </DialogContent>

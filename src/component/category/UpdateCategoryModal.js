@@ -77,11 +77,14 @@ const UpdateCategoryModal = ({ isOpen, onClose, categories, onUpdate }) => {
             onChange={handleCategoryChange}
             MenuProps={menuProps}
           >
-            {categories.map((category, index) => (
-              <MenuItem key={index} value={category.id}>
-                {category.cname}
-              </MenuItem>
-            ))}
+            {categories
+              .slice()
+              .reverse()
+              .map((category, index) => (
+                <MenuItem key={index} value={category.id}>
+                  {category.cname}
+                </MenuItem>
+              ))}
           </Select>
         </FormControl>
 

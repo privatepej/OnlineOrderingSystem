@@ -36,6 +36,9 @@ const useProductModalHandlers = () => {
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
+    if (name === "pname" && value.length > 20) return;
+    if (name === "description" && value.length > 60) return;
+
     setFieldErrors((prev) => ({ ...prev, [name]: "" }));
     setNewProduct((prev) => ({
       ...prev,

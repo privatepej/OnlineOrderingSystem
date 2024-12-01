@@ -17,15 +17,14 @@ export const CartProvider = ({ children }) => {
           const cartData = await Api.viewCart(userId);
           setCart(cartData);
         } catch (error) {
-          console.error("Error fetching cart:", error);
-          setCart({ cartItems: [], cartTotal: 0.0 }); 
+          setCart({ cartItems: [], cartTotal: 0.0 });
         }
       };
       fetchCart();
     } else {
       setCart(null);
     }
-  }, [userId]); 
+  }, [userId]);
 
   const addToCart = async (productId, quantity) => {
     try {
@@ -40,7 +39,7 @@ export const CartProvider = ({ children }) => {
   const removeCartItem = async (productId) => {
     try {
       await Api.removeCartItem(userId, productId);
-      const updatedCart = await Api.viewCart(userId); 
+      const updatedCart = await Api.viewCart(userId);
       setCart(updatedCart);
     } catch (error) {
       console.error("Error removing item:", error);
@@ -50,7 +49,7 @@ export const CartProvider = ({ children }) => {
   const clearCart = async () => {
     try {
       await Api.clearCart(userId);
-      setCart({ cartItems: [], cartTotal: 0.0 }); 
+      setCart({ cartItems: [], cartTotal: 0.0 });
     } catch (error) {
       console.error("Error clearing cart:", error);
     }

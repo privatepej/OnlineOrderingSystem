@@ -64,7 +64,9 @@ const ProductModal = ({
           margin="dense"
           required
           error={!!fieldErrors.pname}
-          helperText={fieldErrors.pname}
+          helperText={
+            fieldErrors.pname || `${product.pname.length}/${20} characters`
+          }
         />
         <TextField
           label={t("PRICE")}
@@ -85,6 +87,7 @@ const ProductModal = ({
           onChange={handleChange}
           fullWidth
           margin="dense"
+          helperText={`${product.description.length}/${60} characters`}
         />
         <FormControl
           fullWidth
@@ -100,11 +103,14 @@ const ProductModal = ({
             MenuProps={menuProps}
             required
           >
-            {categories.map((category, index) => (
-              <MenuItem key={index} value={category.cname}>
-                {category.cname}
-              </MenuItem>
-            ))}
+            {categories
+              .slice()
+              .reverse()
+              .map((category, index) => (
+                <MenuItem key={index} value={category.cname}>
+                  {category.cname}
+                </MenuItem>
+              ))}
           </Select>
           {fieldErrors.categoryname && (
             <Typography variant="caption" color="error">

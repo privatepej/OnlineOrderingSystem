@@ -82,10 +82,13 @@ const UpdateProductModal = ({
     });
     setIsFormDirty(false);
     setFormErrors({});
+    setImagePreview(null);
   };
 
   const handleFieldChange = (e) => {
     const { name, value, files } = e.target;
+    if (name === "pname" && value.length > 20) return;
+    if (name === "description" && value.length > 60) return;
     setUpdatedProduct((prev) => ({
       ...prev,
       [name]: files && files.length > 0 ? files[0] : value,
@@ -160,11 +163,14 @@ const UpdateProductModal = ({
             onChange={(e) => setSelectedProduct(e.target.value)}
             MenuProps={menuProps}
           >
-            {products.map((product, index) => (
-              <MenuItem key={index} value={product.pname}>
-                {product.pname}
-              </MenuItem>
-            ))}
+            {products
+              .slice()
+              .reverse()
+              .map((product, index) => (
+                <MenuItem key={index} value={product.pname}>
+                  {product.pname}
+                </MenuItem>
+              ))}
           </Select>
         </FormControl>
 
@@ -176,7 +182,10 @@ const UpdateProductModal = ({
           fullWidth
           margin="dense"
           error={!!formErrors.pname}
-          helperText={formErrors.pname}
+          helperText={
+            formErrors.pname ||
+            `${updatedProduct.pname.length}/${20} characters`
+          }
         />
         <TextField
           label={t("PRICE")}
@@ -196,6 +205,7 @@ const UpdateProductModal = ({
           onChange={handleFieldChange}
           fullWidth
           margin="dense"
+          helperText={`${updatedProduct.description.length}/${60} characters`}
         />
         <FormControl fullWidth margin="dense" error={!!formErrors.categoryname}>
           <InputLabel>{t("CATEGORY")}</InputLabel>
@@ -206,11 +216,14 @@ const UpdateProductModal = ({
             onChange={handleFieldChange}
             MenuProps={menuProps}
           >
-            {categories.map((category, index) => (
-              <MenuItem key={index} value={category.cname}>
-                {category.cname}
-              </MenuItem>
-            ))}
+            {categories
+              .slice()
+              .reverse()
+              .map((category, index) => (
+                <MenuItem key={index} value={category.cname}>
+                  {category.cname}
+                </MenuItem>
+              ))}
           </Select>
           {formErrors.categoryname && (
             <Typography variant="caption" color="error">

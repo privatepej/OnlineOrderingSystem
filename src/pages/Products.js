@@ -78,14 +78,16 @@ const Products = () => {
     selectedCategory,
     searchQuery
   );
-
   const memoizedProductCards = useMemo(() => {
     return filteredProducts.length > 0 ? (
-      filteredProducts.map((product, index) => (
-        <Grid size={{ xs: 12, md: 3, sm: 6 }} key={index}>
-          <ProductCard product={product} />
-        </Grid>
-      ))
+      filteredProducts
+        .slice()
+        .reverse()
+        .map((product, index) => (
+          <Grid size={{ xs: 12, md: 3, sm: 6 }} key={index}>
+            <ProductCard product={product} />
+          </Grid>
+        ))
     ) : (
       <Typography
         variant="h6"

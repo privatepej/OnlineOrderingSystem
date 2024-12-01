@@ -35,7 +35,6 @@ const Api = {
       );
       return response.data;
     } catch (error) {
-      console.error("Error adding product:", error.message);
       throw error;
     }
   },
@@ -45,7 +44,6 @@ const Api = {
       const response = await axiosInstance.get("/category/list");
       return response.data;
     } catch (error) {
-      console.error("Error fetching categories:", error.message);
       throw error;
     }
   },
@@ -57,7 +55,6 @@ const Api = {
       );
       return response.data;
     } catch (error) {
-      console.error("Error deleting product:", error.message);
       throw error;
     }
   },
@@ -75,7 +72,6 @@ const Api = {
       );
       return response.data;
     } catch (error) {
-      console.error("Error updating product:", error.message);
       throw error;
     }
   },
@@ -86,7 +82,6 @@ const Api = {
       const response = await axiosInstance.post("/category/add", newCategory);
       return response.data;
     } catch (error) {
-      console.error("Error adding category:", error.message);
       throw error;
     }
   },
@@ -98,7 +93,6 @@ const Api = {
       );
       return response.data;
     } catch (error) {
-      console.error("Error deleting category:", error.message);
       throw error;
     }
   },
@@ -110,7 +104,6 @@ const Api = {
       );
       return response.data;
     } catch (error) {
-      console.error("Error updating category:", error.message);
       throw error;
     }
   },
@@ -122,9 +115,7 @@ const Api = {
       });
       return response.data;
     } catch (error) {
-      throw (
-        error.response?.data || "Login failed. Please check your credentials."
-      );
+      throw error.response?.data;
     }
   },
   registerUser: async (formData) => {
@@ -132,7 +123,7 @@ const Api = {
       const response = await axiosInstance.post("/user/register", formData);
       return response.data;
     } catch (error) {
-      throw error.response?.data || "Registration failed. Please try again.";
+      throw error.response?.data;
     }
   },
   checkImageExists: async (filename) => {
@@ -142,7 +133,6 @@ const Api = {
       });
       return response.status !== 404;
     } catch (error) {
-      console.error("Error checking if file exists:", error);
       return false;
     }
   },
@@ -155,7 +145,6 @@ const Api = {
       );
       return response.data;
     } catch (error) {
-      console.error("Error adding to cart:", error.message);
       throw error;
     }
   },
@@ -165,7 +154,6 @@ const Api = {
       const response = await axiosInstance.get(`/cart/view?userId=${userId}`);
       return response.data;
     } catch (error) {
-      console.error("Error fetching cart:", error.message);
       throw error;
     }
   },
@@ -177,7 +165,6 @@ const Api = {
       );
       return response.data;
     } catch (error) {
-      console.error("Error removing cart item:", error.message);
       throw error;
     }
   },
@@ -189,7 +176,6 @@ const Api = {
       );
       return response.data;
     } catch (error) {
-      console.error("Error clearing cart:", error.message);
       throw error;
     }
   },
