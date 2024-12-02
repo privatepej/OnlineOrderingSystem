@@ -8,13 +8,14 @@ import {
   TextField,
   Typography,
   Container,
-  Alert,
   Select,
   MenuItem,
   InputLabel,
   FormControl,
 } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import useAlert from "../hooks/useAlert";
+import CustomAlert from "../component/CustomAlert";
 
 const SignupPage = () => {
   const [formData, setFormData] = useState({
@@ -25,29 +26,27 @@ const SignupPage = () => {
     address: "",
     role: "CUSTOMER",
   });
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
   const navigate = useNavigate();
   const { user } = useAuth();
   const { t } = useTranslation("signup");
+  const { alertMessage, alertSeverity, showAlert } = useAlert();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    setError("");
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (formData.password !== formData.confirmPassword) {
-      setError("Passwords do not match");
+      showAlert("Passwords do not match", "error");
       return;
     }
 
     try {
       await Api.registerUser(formData);
-      setSuccess("Registration successful!");
+      showAlert("Registration successful!", "success");
       setFormData({
         username: "",
         email: "",
@@ -60,7 +59,10 @@ const SignupPage = () => {
         navigate(user?.role === "ADMINISTRATOR" ? "/admin/signup" : "/login");
       }, 2000);
     } catch (err) {
-      setError(err || "An error occurred while registering. Please try again.");
+      showAlert(
+        "An error occurred while registering. Please try again",
+        "error"
+      );
     }
   };
 
@@ -91,16 +93,14 @@ const SignupPage = () => {
         >
           {user?.role === "ADMINISTRATOR" ? t("TITLE_ADD") : t("TITLE_SIGNUP")}
         </Typography>
-        {error && (
-          <Alert severity="error" sx={{ marginBottom: "20px" }}>
-            {error}
-          </Alert>
-        )}
-        {success && (
-          <Alert severity="success" sx={{ marginBottom: "20px" }}>
-            {success}
-          </Alert>
-        )}
+
+        <CustomAlert
+          message={alertMessage}
+          severity={alertSeverity}
+          sx={{ mb: 2 }}
+          onClose={() => showAlert("")}
+        />
+
         <Box component="form" onSubmit={handleSubmit}>
           <TextField
             label="Username"

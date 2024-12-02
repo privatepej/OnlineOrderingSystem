@@ -95,7 +95,9 @@
         "LOG_IN": "Log in",
         "SIGN_IN": "Sign In",
         "DONT_HAVE_ACCOUNT": "Don't have an account?",
-        "SIGN_UP": "Sign Up"
+        "SIGN_UP": "Sign Up",
+        "LOGIN_SUCCESS": "Login Success",
+        "LOGIN_FAILED": "Invalid email or password"
       },
       "signup": {
         "ROLE": "Role",

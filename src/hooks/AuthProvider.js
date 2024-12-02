@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState } from "react";
 
 const AuthContext = createContext();
 
@@ -17,18 +17,6 @@ export const AuthProvider = ({ children }) => {
     sessionStorage.removeItem("user");
     setUser(null);
   };
-
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const storedUser = sessionStorage.getItem("user");
-      setUser(storedUser ? JSON.parse(storedUser) : null);
-    };
-    window.addEventListener("storage", handleStorageChange);
-
-    return () => {
-      window.removeEventListener("storage", handleStorageChange);
-    };
-  }, []);
 
   return (
     <AuthContext.Provider value={{ user, login, logout }}>

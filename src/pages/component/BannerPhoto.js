@@ -17,7 +17,6 @@ const BannerPhoto = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        marginTop: "50px",
       }}
     >
       <Box

@@ -14,7 +14,6 @@ const useProductAndCategoryActions = ({ showAlert }) => {
           Api.getProducts(),
           Api.getCategories(),
         ]);
-
         setProducts(Array.isArray(productsData) ? productsData : []);
         setCategories(Array.isArray(categoriesData) ? categoriesData : []);
       } catch (err) {

@@ -8,26 +8,25 @@ import {
   Typography,
   Link,
   Container,
-  Alert,
 } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import useAlert from "../hooks/useAlert";
+import CustomAlert from "../component/CustomAlert";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
   const { login } = useAuth();
   const { t } = useTranslation("login");
+  const { alertMessage, alertSeverity, showAlert } = useAlert();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setError("");
-
     try {
       const userData = await Api.login(email, password);
       login(userData);
-    } catch (err) {
-      setError(err || "Invalid email or password");
+    } catch (error) {
+      showAlert(error?.response?.data?.message || t("LOGIN_FAILED"), "error");
     }
   };
 
@@ -56,11 +55,12 @@ const LoginPage = () => {
           {t("LOG_IN")}
         </Typography>
 
-        {error && (
-          <Alert severity="error" sx={{ marginBottom: "20px" }}>
-            {error}
-          </Alert>
-        )}
+        <CustomAlert
+          message={alertMessage}
+          severity={alertSeverity}
+          sx={{ mb: 2 }}
+          onClose={() => showAlert("")}
+        />
 
         <Box component="form" onSubmit={handleLogin}>
           <TextField

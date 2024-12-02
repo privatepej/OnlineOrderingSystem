@@ -15,9 +15,6 @@ const Api = {
       const response = await axiosInstance.get("/product/listWithImage");
       return response.data;
     } catch (error) {
-      if (error.response && error.response.status === 404) {
-        navigate("/error");
-      }
       throw error;
     }
   },
@@ -76,7 +73,6 @@ const Api = {
     }
   },
 
-  // Add a new category
   addCategory: async (newCategory) => {
     try {
       const response = await axiosInstance.post("/category/add", newCategory);
@@ -115,7 +111,7 @@ const Api = {
       });
       return response.data;
     } catch (error) {
-      throw error.response?.data;
+      throw error;
     }
   },
   registerUser: async (formData) => {
@@ -123,7 +119,7 @@ const Api = {
       const response = await axiosInstance.post("/user/register", formData);
       return response.data;
     } catch (error) {
-      throw error.response?.data;
+      throw error;
     }
   },
   checkImageExists: async (filename) => {
@@ -137,7 +133,6 @@ const Api = {
     }
   },
 
-  // Cart API
   addToCart: async (userId, productId, quantity = 1) => {
     try {
       const response = await axiosInstance.post(

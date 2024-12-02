@@ -11,7 +11,6 @@ const AboutUsHome = () => {
   return (
     <Box
       sx={{
-        paddingTop: "50px",
         minHeight: "70vh",
         display: "flex",
         alignItems: "center",

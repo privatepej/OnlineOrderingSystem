@@ -177,7 +177,7 @@ const Products = () => {
         onConfirm={() =>
           handleDeleteProduct(selectedProduct, handleCloseDeleteModal)
         }
-        products={Array.isArray(products) ? products : []} // Guard against bad data
+        products={Array.isArray(products) ? products : []}
         selectedProduct={selectedProduct}
         setSelectedProduct={setSelectedProduct}
       />
